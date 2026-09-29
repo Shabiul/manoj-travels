@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useBooking } from "@/hooks/useBooking";
 import { FormField } from "@/components/forms/FormField";
+import { LocationAutocomplete } from "@/components/forms/LocationAutocomplete";
 import { BookingConfirmation } from "./BookingConfirmation";
 import { Button } from "@/components/ui/Button";
 import { TRIP_TYPES, VEHICLE_OPTIONS, PASSENGER_OPTIONS } from "@/lib/constants";
@@ -75,17 +76,19 @@ export function EnquiryForm({
           onChange={(e) => update("vehicle", e.target.value)}
           options={[{ value: "", label: "Select" }, ...vehicleOptions]}
         />
-        <FormField
+        <LocationAutocomplete
           label="Pickup"
           name="pickup"
+          placeholder="e.g. Bangalore, Indiranagar, Electronic City"
           required
           error={attempted ? errors.pickup : undefined}
           value={values.pickup}
           onChange={(e) => update("pickup", e.target.value)}
         />
-        <FormField
+        <LocationAutocomplete
           label="Destination / Drop"
           name="destination"
+          placeholder="e.g. Mysore, Ooty, Coorg, Chennai"
           value={values.destination || values.drop}
           onChange={(e) => update("destination", e.target.value)}
         />

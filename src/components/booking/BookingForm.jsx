@@ -12,6 +12,7 @@ import { CallButton } from "@/components/common/CallButton";
 import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { PASSENGER_OPTIONS, TRIP_TYPES } from "@/lib/constants";
 import { fleet } from "@/data/fleet";
+import { resolveLocationName } from "@/lib/locationSearch";
 import { cn } from "@/lib/utils";
 
 // Vehicle choices come straight from the real fleet — no invented vehicles.
@@ -32,9 +33,13 @@ export function BookingForm({ className }) {
 
   const whatsappMessage = useMemo(() => {
     const parts = [`Hello Manoj Tours and Travels, I'd like to enquire about a ${tripLabel} booking.`];
-    if (values.pickup) parts.push(`Pickup: ${values.pickup}`);
-    if (values.drop) parts.push(`Drop: ${values.drop}`);
-    if (values.destination) parts.push(`Destination: ${values.destination}`);
+    const resolvedPickup = resolveLocationName(values.pickup);
+    const resolvedDrop = resolveLocationName(values.drop);
+    const resolvedDest = resolveLocationName(values.destination);
+
+    if (resolvedPickup) parts.push(`Pickup: ${resolvedPickup}`);
+    if (resolvedDrop) parts.push(`Drop: ${resolvedDrop}`);
+    if (resolvedDest) parts.push(`Destination: ${resolvedDest}`);
     if (values.date) parts.push(`Date: ${values.date}`);
     if (values.returnDate) parts.push(`Return: ${values.returnDate}`);
     if (values.time) parts.push(`Time: ${values.time}`);

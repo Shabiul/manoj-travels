@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { validateEnquiry } from "@/lib/validation";
+import { resolveLocationName } from "@/lib/locationSearch";
 
 const baseState = {
   tripType: "one-way",
@@ -43,7 +44,15 @@ export function useBooking(overrides) {
   }, []);
 
   const submit = useCallback(async () => {
-    const { isValid, errors: validationErrors } = validateEnquiry(values);
+    // Resolve any location aliases (e.g. "bengaluru" -> "Bangalore (Bengaluru)")
+    const payload = {
+      ...values,
+      pickup: resolveLocationName(values.pickup),
+      drop: resolveLocationName(values.drop),
+      destination: resolveLocationName(values.destination),
+    };
+
+    const { isValid, errors: validationErrors } = validateEnquiry(payload);
     setErrors(validationErrors);
     if (!isValid) return { ok: false };
 
@@ -52,7 +61,7 @@ export function useBooking(overrides) {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");

@@ -1,19 +1,17 @@
 "use client";
 
-import { FormField } from "@/components/forms/FormField";
+import { LocationAutocomplete } from "@/components/forms/LocationAutocomplete";
 
-/** Renders the right pickup/drop/destination fields for the selected trip type. */
+/** Renders the right pickup/drop/destination fields for the selected trip type with intelligent Indian location autocomplete and alias resolution. */
 export function LocationFields({ tripType, values, onChange }) {
   const set = (field) => (e) => onChange(field, e.target.value);
 
   if (tripType === "local") {
-    // Local trips are billed as an hourly/km package (see DateTimeFields),
-    // but still need a pickup point — also required by validateEnquiry().
     return (
-      <FormField
+      <LocationAutocomplete
         label="Pickup Location"
         name="pickup"
-        placeholder="Bangalore"
+        placeholder="e.g. Bangalore, Electronic City, Kanakapura Road"
         required
         value={values.pickup}
         onChange={set("pickup")}
@@ -24,18 +22,18 @@ export function LocationFields({ tripType, values, onChange }) {
   if (tripType === "round-trip" || tripType === "tour-package") {
     return (
       <>
-        <FormField
+        <LocationAutocomplete
           label="Pickup"
           name="pickup"
-          placeholder="Bangalore"
+          placeholder="e.g. Bangalore"
           required
           value={values.pickup}
           onChange={set("pickup")}
         />
-        <FormField
+        <LocationAutocomplete
           label="Destination"
           name="destination"
-          placeholder="e.g. Ooty, Coorg, Mysore"
+          placeholder="e.g. Ooty, Coorg, Mysore, Wayanad"
           required
           value={values.destination}
           onChange={set("destination")}
@@ -47,18 +45,18 @@ export function LocationFields({ tripType, values, onChange }) {
   // one-way, airport
   return (
     <>
-      <FormField
-        label={tripType === "airport" ? "Pickup / Drop" : "Pickup"}
+      <LocationAutocomplete
+        label={tripType === "airport" ? "City / Locality" : "Pickup"}
         name="pickup"
-        placeholder="Bangalore"
+        placeholder={tripType === "airport" ? "e.g. Koramangala, Whitefield, Jayanagar" : "e.g. Bangalore"}
         required
         value={values.pickup}
         onChange={set("pickup")}
       />
-      <FormField
-        label={tripType === "airport" ? "Airport" : "Drop"}
+      <LocationAutocomplete
+        label={tripType === "airport" ? "Airport" : "Drop Location"}
         name="drop"
-        placeholder={tripType === "airport" ? "Kempegowda International Airport" : "e.g. Mysore"}
+        placeholder={tripType === "airport" ? "Kempegowda International Airport (BLR)" : "e.g. Mysore, Chennai, Coimbatore"}
         required
         value={values.drop}
         onChange={set("drop")}
@@ -66,3 +64,4 @@ export function LocationFields({ tripType, values, onChange }) {
     </>
   );
 }
+
