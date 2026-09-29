@@ -7,16 +7,25 @@ import { Reveal } from "@/components/ui/Reveal";
 import { blogPosts } from "@/data/blog";
 import { buildMetadata } from "@/lib/metadata";
 
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Travel Guides", href: "/blog" },
+];
+
 export const metadata = buildMetadata({
-  title: "Travel Guides",
-  description: "Practical guides on booking one way, round trip, local and airport cabs with Manoj Tours and Travels.",
+  title: "Bangalore Taxi & Outstation Travel Guides",
+  description:
+    "Practical guides on booking one way cabs, round trips, local hourly packages and Kempegowda airport transfers with Manoj Tours and Travels Bangalore.",
   path: "/blog",
+  image: blogPosts[0]?.image,
 });
 
 export default function BlogPage() {
   return (
     <Section tone="paper" className="pt-36 md:pt-44">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Travel Guides", href: "/blog" }]} />
+      <Breadcrumbs items={breadcrumbItems} />
+
+
       <SectionHeading
         as="h1"
         className="mt-6"

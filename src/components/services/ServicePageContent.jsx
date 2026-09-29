@@ -11,6 +11,7 @@ import { PricingSelector } from "@/components/pricing/PricingSelector";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { fleet } from "@/data/fleet";
+
 import { getServiceFaqs } from "@/data/faqs";
 import { getPricing } from "@/lib/siteContent";
 
@@ -19,20 +20,22 @@ export async function ServicePageContent({ service }) {
   const faqs = getServiceFaqs(service);
   const pricing = await getPricing();
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: service.name, href: `/services/${service.slug}` },
+  ];
+
   return (
     <>
       <ServiceSchema service={service} />
       <FAQSchema faqs={faqs} />
       <ServiceHero service={service} />
 
+
       <Section tone="paper">
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Services", href: "/services" },
-            { label: service.name, href: `/services/${service.slug}` },
-          ]}
-        />
+        <Breadcrumbs items={breadcrumbItems} />
+
         <div className="mt-8 max-w-3xl">
           <p className="text-lg leading-relaxed text-[var(--color-text-muted)]">{service.summary}</p>
         </div>

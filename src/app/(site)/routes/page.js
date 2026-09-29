@@ -7,6 +7,7 @@ import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { Accordion } from "@/components/ui/Accordion";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { routeGroups } from "@/data/routeGroups";
+
 import { generalFaqs } from "@/data/faqs";
 import { buildMetadata } from "@/lib/metadata";
 import { slugify } from "@/lib/utils";
@@ -31,6 +32,7 @@ export const metadata = buildMetadata({
   description:
     "One-way and round-trip outstation taxi routes from Bangalore across Karnataka, Tamil Nadu, Andhra Pradesh, Telangana, Kerala and Goa. Call or WhatsApp to check your route and fare.",
   path: "/routes",
+  image: "/images/destinations/mysuru.png",
   keywords: [
     "bangalore outstation taxi routes",
     "bangalore to tamil nadu taxi",
@@ -55,8 +57,10 @@ export default function RoutesPage() {
   return (
     <>
       <FAQSchema faqs={faqs} />
+
       <Section tone="ink" className="pt-32">
         <Breadcrumbs items={breadcrumbItems} />
+
         <div className="mt-8 max-w-2xl">
           <p className="text-eyebrow mb-4 text-[var(--color-accent-soft)]">Outstation Routes</p>
           <h1 className="text-balance text-h2 font-display text-[var(--color-text-on-dark)]">

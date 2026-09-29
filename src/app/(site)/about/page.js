@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { PageHero } from "@/components/common/PageHero";
+
 import { Reveal } from "@/components/ui/Reveal";
 import { Video } from "@/components/ui/Video";
 import { Button } from "@/components/ui/Button";
@@ -11,11 +12,17 @@ import { AboutKanyakumariImage } from "@/components/about/AboutKanyakumariImage"
 import { business } from "@/config/business.config";
 import { buildMetadata } from "@/lib/metadata";
 
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+];
+
 export const metadata = buildMetadata({
-  title: "About Us",
+  title: "About Manoj Tours & Travels Bangalore",
   description:
-    "Manoj Tours and Travels (Manoj Taxi Service) is a 24x7 taxi and cab service based in Bangalore, Karnataka, offering one way, round trip, local and airport cabs.",
+    "Manoj Tours and Travels (Manoj Taxi Service) is a 24x7 taxi and cab service based in Kaggalipura, Bangalore, offering one way, round trip, local and airport cabs across Karnataka and South India.",
   path: "/about",
+  image: "/images/destinations/pondicherry.png",
 });
 
 const values = [
@@ -41,6 +48,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+
+
         eyebrow="About Us"
         title="A straightforward cab service, run from Bangalore"
         description={`${business.legalName}, also known as ${business.tradeName}, offers one way cabs, round trip cabs, local cabs and airport pickup & drop across Bangalore and Karnataka — available ${business.availability}.`}

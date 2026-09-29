@@ -1,40 +1,107 @@
 import { defaultSeo } from "@/config/seo.config";
 import { siteConfig } from "@/config/site.config";
+import { business } from "@/config/business.config";
 
 /**
- * Build a Next.js Metadata object for a route.
- * @param {{title?: string, description?: string, path?: string, keywords?: string[], noIndex?: boolean}} opts
+ * Build a robust, indexable Next.js Metadata object for any route.
+ * Optimized for Google Search Console, OpenGraph, Twitter, GEO & AEO search engines.
+ * 
+ * @param {{
+ *   title?: string,
+ *   description?: string,
+ *   path?: string,
+ *   keywords?: string[],
+ *   image?: string,
+ *   type?: "website" | "article",
+ *   noIndex?: boolean
+ * }} opts
  */
 export function buildMetadata({
   title,
   description = defaultSeo.description,
   path = "/",
   keywords,
+  image,
+  type = "website",
   noIndex = false,
 } = {}) {
-  const url = `${siteConfig.url}${path === "/" ? "" : path}`;
-  const fullTitle = title ? `${title} | ${defaultSeo.titleTemplate.replace("%s | ", "")}` : defaultSeo.defaultTitle;
+  const cleanPath = path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
+  const canonicalUrl = `${siteConfig.url}${cleanPath}`;
+  const pageTitle = title
+    ? `${title} | ${business.legalName}`
+    : defaultSeo.defaultTitle;
+
+  const ogImageUrl = image
+    ? image.startsWith("http")
+      ? image
+      : `${siteConfig.url}${image.startsWith("/") ? image : `/${image}`}`
+    : `${siteConfig.url}/opengraph-image`;
 
   return {
+    metadataBase: new URL(siteConfig.url),
     title: title || defaultSeo.defaultTitle,
     description,
     keywords: keywords || defaultSeo.keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: canonicalUrl,
+    },
     robots: noIndex
-      ? { index: false, follow: false }
-      : { index: true, follow: true },
+      ? {
+          index: false,
+          follow: false,
+          nocache: true,
+          googleBot: {
+            index: false,
+            follow: false,
+          },
+        }
+      : {
+          index: true,
+          follow: true,
+          nocache: false,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        },
     openGraph: {
-      title: fullTitle,
+      title: pageTitle,
       description,
-      url,
-      siteName: defaultSeo.defaultTitle,
+      url: canonicalUrl,
+      siteName: siteConfig.name,
       locale: siteConfig.locale,
-      type: "website",
+      type,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: title || siteConfig.name,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: fullTitle,
+      title: pageTitle,
       description,
+      images: [ogImageUrl],
+    },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "googlee8b15d2a93b4f62e",
+      yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+      other: {
+        "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION || "",
+      },
+    },
+    other: {
+      "geo.region": "IN-KA",
+      "geo.placename": "Bangalore",
+      "geo.position": `${business.geo.latitude};${business.geo.longitude}`,
+      ICBM: `${business.geo.latitude}, ${business.geo.longitude}`,
+      "format-detection": "telephone=yes",
     },
   };
 }

@@ -5,20 +5,30 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { destinations } from "@/data/destinations";
+
 import { destinationDirectory } from "@/data/destinationDirectory";
 import { buildMetadata } from "@/lib/metadata";
+
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Destinations", href: "/destinations" },
+];
 
 export const metadata = buildMetadata({
   title: "Destinations & Routes from Bangalore",
   description:
     "Browse destinations and outstation cab routes from Bangalore — hill stations, coastal towns, heritage cities and pilgrimage destinations across South India. Search by name or category.",
   path: "/destinations",
+  image: "/images/destinations/conoor.png",
 });
 
 export default function DestinationsPage() {
   return (
     <>
       <DestinationHero
+
+
         title="Destinations from Bangalore"
         description="Round trips, one-way drops and tour packages to Karnataka's hill stations, coastal towns and beyond, plus popular pilgrimage and heritage routes across South India."
         image="/images/destinations/conoor.png"

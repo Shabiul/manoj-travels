@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Section } from "@/components/ui/Section";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Image } from "@/components/ui/Image";
+
 import { Reveal } from "@/components/ui/Reveal";
 import { ArticleSchema } from "@/components/seo/ArticleSchema";
 import { ServiceCTA } from "@/components/services/ServiceCTA";
@@ -16,7 +17,13 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const post = getBlogPostBySlug(params.slug);
   if (!post) return {};
-  return buildMetadata({ title: post.title, description: post.excerpt, path: `/blog/${post.slug}` });
+  return buildMetadata({
+    title: post.title,
+    description: post.excerpt,
+    path: `/blog/${post.slug}`,
+    image: post.image,
+    type: "article",
+  });
 }
 
 export default function BlogPostPage({ params }) {
@@ -24,17 +31,18 @@ export default function BlogPostPage({ params }) {
   if (!post) notFound();
 
   const relatedService = post.relatedServiceSlug ? getServiceBySlug(post.relatedServiceSlug) : null;
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Travel Guides", href: "/blog" },
+    { label: post.title, href: `/blog/${post.slug}` },
+  ];
 
   return (
     <Section tone="paper" className="pt-36 md:pt-44">
       <ArticleSchema title={post.title} description={post.excerpt} image={post.image} slug={post.slug} />
-      <Breadcrumbs
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Travel Guides", href: "/blog" },
-          { label: post.title, href: `/blog/${post.slug}` },
-        ]}
-      />
+      <Breadcrumbs items={breadcrumbItems} />
+
+
       <div className="mx-auto mt-8 max-w-3xl">
         <Reveal>
           <h1 className="font-display text-3xl text-[var(--color-ink)] md:text-4xl">{post.title}</h1>

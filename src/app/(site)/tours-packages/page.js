@@ -5,11 +5,17 @@ import { ToursPackagesExplorer } from "@/components/tours/ToursPackagesExplorer"
 import { getTourPackages } from "@/lib/siteContent";
 import { buildMetadata } from "@/lib/metadata";
 
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Tours & Packages", href: "/tours-packages" },
+];
+
 export const metadata = buildMetadata({
-  title: "Tours & Packages",
+  title: "Tours & Packages from Bangalore",
   description:
     "Round trip tour packages from Bangalore with Manoj Tours and Travels — Coorg, Munnar, Ooty, Chikmagalur, Goa, Gokarna, Sakleshpur, Kodaikanal, Pondicherry, Wayanad, Hampi, Tirupati and more.",
   path: "/tours-packages",
+  image: "/images/destinations/coorg.png",
   keywords: [
     "bangalore to coorg tour package",
     "bangalore to munnar tour package",
@@ -27,6 +33,8 @@ export default async function ToursPackagesPage() {
   return (
     <>
       <PageHero
+
+
         eyebrow="Tours & Packages"
         title="Tour packages from Bangalore"
         description="Handpicked round-trip tour packages to Karnataka, Kerala, Tamil Nadu, Andhra Pradesh, Puducherry and Goa."

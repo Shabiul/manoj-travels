@@ -9,6 +9,7 @@ import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { DestinationSchema } from "@/components/seo/DestinationSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { destinations, getDestinationBySlug } from "@/data/destinations";
+
 import { getKeywordEntryByHref } from "@/data/destinationKeywords";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -24,6 +25,7 @@ export function generateMetadata({ params }) {
     description: `${destination.description} Book a one-way, round-trip or local taxi from Bangalore to ${destination.name}, or ${destination.name} to Bangalore, with Manoj Tours and Travels — sedan and SUV options, available 24×7.`,
     path: `/destinations/${destination.slug}`,
     keywords: destination.keywords,
+    image: destination.image,
   });
 }
 
@@ -43,6 +45,8 @@ export default function DestinationPage({ params }) {
     <>
       <DestinationSchema destination={destination} />
       <FAQSchema faqs={buildDestinationFaqs(destination)} />
+
+
       <DestinationHero
         title={destination.name}
         description={destination.region}

@@ -146,9 +146,22 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Bangalore Local SEO & GEO Service Coverage Strip */}
+        <div className="mt-10 border-t border-[var(--color-line-on-dark)] pt-8">
+          <p className="text-[13px] font-medium uppercase tracking-[0.16em] text-[var(--color-text-on-dark-muted)]/70">
+            Bangalore Hubs &amp; Coverage Areas
+          </p>
+          <p className="mt-3 text-[14px] leading-relaxed text-[var(--color-text-on-dark-muted)]/80">
+            <strong>Local Hubs:</strong> Kaggalipura, Kanakapura Road, Banashankari, JP Nagar, Jayanagar, Electronic City, Whitefield, Koramangala, Indiranagar, HSR Layout, Marathahalli, Bellandur, Sarjapur Road, BTM Layout, Hebbal, Yelahanka, Majestic &amp; Kempegowda International Airport (BLR).
+            <br />
+            <strong>Outstation Corridors:</strong> Bangalore to Mysore, Ooty, Coorg, Chikmagalur, Sakleshpur, Tirupati, Chennai, Coimbatore, Hyderabad, Wayanad, Munnar, Goa &amp; 150+ South India destinations.
+          </p>
+        </div>
+
         {/* Bottom row — copyright only; phone/email/address live in the
             Contact column above, not duplicated here. */}
-        <div className="mt-10 border-t border-[var(--color-line-on-dark)] pt-7">
+        <div className="mt-8 border-t border-[var(--color-line-on-dark)] pt-7">
+
           <p className="text-[15px] text-[var(--color-text-on-dark-muted)]/70">
             © {year} Manoj Tours and Travels (Manoj Taxi Service). All rights reserved.
           </p>

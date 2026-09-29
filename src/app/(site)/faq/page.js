@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { Accordion } from "@/components/ui/Accordion";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { PageHero } from "@/components/common/PageHero";
+
 import { Reveal } from "@/components/ui/Reveal";
 import { Image } from "@/components/ui/Image";
 import { Button } from "@/components/ui/Button";
@@ -10,17 +11,24 @@ import { FAQSchema } from "@/components/seo/FAQSchema";
 import { generalFaqs } from "@/data/faqs";
 import { buildMetadata } from "@/lib/metadata";
 
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "FAQ", href: "/faq" },
+];
+
 export const metadata = buildMetadata({
-  title: "Frequently Asked Questions",
+  title: "Frequently Asked Questions — Cab & Taxi Hire Bangalore",
   description:
-    "Answers to common questions about booking, pricing, availability and vehicles with Manoj Tours and Travels (Manoj Taxi Service).",
+    "Clear answers to common questions about booking, outstation fares, 24x7 availability, Kempegowda airport cabs and vehicles with Manoj Tours and Travels.",
   path: "/faq",
+  image: "/images/destinations/sakleshpura.png",
 });
 
 export default function FAQPage() {
   return (
     <>
       <FAQSchema faqs={generalFaqs} />
+
       <PageHero
         eyebrow="FAQ"
         title="Frequently asked questions"
@@ -29,7 +37,8 @@ export default function FAQPage() {
         imageAlt="Sakleshpur"
       />
       <Section tone="paper">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "FAQ", href: "/faq" }]} />
+      <Breadcrumbs items={breadcrumbItems} />
+
       <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[1.3fr_1fr]">
         <Accordion items={generalFaqs} />
 

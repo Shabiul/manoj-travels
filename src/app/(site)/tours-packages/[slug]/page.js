@@ -10,6 +10,7 @@ import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { TourPackageSchema } from "@/components/seo/TourPackageSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { tourPackages } from "@/data/tourPackages";
+
 import { destinations } from "@/data/destinations";
 import { getAllTourPackages } from "@/lib/siteContent";
 import { pricingNotes } from "@/data/pricing";
@@ -29,10 +30,12 @@ async function getPackage(slug) {
 export async function generateMetadata({ params }) {
   const pkg = await getPackage(params.slug);
   if (!pkg) return {};
+  const relatedDest = destinations.find((d) => pkg.id.includes(d.slug));
   return buildMetadata({
     title: pkg.title,
     description: `${pkg.description} Book with Manoj Tours and Travels — sedan, SUV and Tempo Traveller options, available 24×7.`,
     path: `/tours-packages/${pkg.id}`,
+    image: pkg.image || relatedDest?.image,
   });
 }
 
@@ -68,6 +71,8 @@ export default async function TourPackageDetailPage({ params }) {
     <>
       <TourPackageSchema pkg={pkg} />
       <FAQSchema faqs={faqs} />
+
+
       {pkg.image ? (
         <PageHero
           eyebrow="Tour Package"

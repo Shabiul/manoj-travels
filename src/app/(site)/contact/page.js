@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { ContactHero } from "@/components/common/ContactHero";
+
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { CallButton } from "@/components/common/CallButton";
@@ -9,10 +10,15 @@ import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { getBusinessInfo } from "@/lib/siteContent";
 import { buildMetadata } from "@/lib/metadata";
 
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Contact", href: "/contact" },
+];
+
 export const metadata = buildMetadata({
-  title: "Contact Us",
+  title: "Contact 24x7 Cab Booking Bangalore",
   description:
-    "Contact Manoj Tours and Travels (Manoj Taxi Service) in Bangalore — call, WhatsApp or send an enquiry. Available 24x7.",
+    "Contact Manoj Tours and Travels (Manoj Taxi Service) in Bangalore — call +91 78997 87478, WhatsApp or send an online enquiry. Available 24x7 for local, airport, and outstation cabs.",
   path: "/contact",
 });
 
@@ -47,8 +53,10 @@ export default async function ContactPage() {
     <>
       <ContactHero />
 
+
       <Section tone="paper">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact", href: "/contact" }]} />
+      <Breadcrumbs items={breadcrumbItems} />
+
       <SectionHeading
         className="mt-6"
         eyebrow="Reach Us"

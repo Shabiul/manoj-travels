@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { Section } from "@/components/ui/Section";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { VehicleSchema } from "@/components/seo/VehicleSchema";
+
 import { VehicleDetails } from "@/components/fleet/VehicleDetails";
 import { fleet, getFleetBySlug } from "@/data/fleet";
 import { buildMetadata } from "@/lib/metadata";
@@ -13,9 +15,10 @@ export function generateMetadata({ params }) {
   const vehicle = getFleetBySlug(params.slug);
   if (!vehicle) return {};
   return buildMetadata({
-    title: `${vehicle.name} — ${vehicle.category}`,
-    description: vehicle.description,
+    title: `${vehicle.name} — ${vehicle.category} Cab Hire in Bangalore`,
+    description: `${vehicle.description} Book ${vehicle.name} for local, outstation and airport taxi service with Manoj Tours and Travels Bangalore.`,
     path: `/fleet/${vehicle.slug}`,
+    image: vehicle.image,
   });
 }
 
@@ -23,18 +26,23 @@ export default function FleetVehiclePage({ params }) {
   const vehicle = getFleetBySlug(params.slug);
   if (!vehicle) notFound();
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Fleet", href: "/fleet" },
+    { label: vehicle.name, href: `/fleet/${vehicle.slug}` },
+  ];
+
   return (
-    <Section tone="paper" className="pt-36 md:pt-44">
-      <Breadcrumbs
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Fleet", href: "/fleet" },
-          { label: vehicle.name, href: `/fleet/${vehicle.slug}` },
-        ]}
-      />
-      <div className="mt-8">
-        <VehicleDetails vehicle={vehicle} />
-      </div>
-    </Section>
+    <>
+      <VehicleSchema vehicle={vehicle} />
+      <Section tone="paper" className="pt-36 md:pt-44">
+
+        <Breadcrumbs items={breadcrumbItems} />
+        <div className="mt-8">
+          <VehicleDetails vehicle={vehicle} />
+        </div>
+      </Section>
+    </>
   );
 }
+
