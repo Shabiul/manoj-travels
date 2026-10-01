@@ -47,7 +47,19 @@ export function HeroVideo({ className }) {
   const [armedForPreload, setArmedForPreload] = useState(0); // preload up through this index
   const [firstFramePainted, setFirstFramePainted] = useState(false);
   const [allFailed, setAllFailed] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const kenBurnsEnabled = useKenBurns();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const isLg = window.matchMedia("(min-width: 1024px)").matches;
+    const hasDataSaver = navigator.connection?.saveData === true;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isLg && !hasDataSaver && !prefersReducedMotion) {
+      setIsDesktop(true);
+    }
+  }, []);
 
   useEffect(() => {
     activeRef.current = active;
@@ -90,6 +102,7 @@ export function HeroVideo({ className }) {
   };
 
   useEffect(() => {
+    if (!isDesktop) return;
     const cleanups = [];
 
     refs.forEach((ref, index) => {
@@ -180,7 +193,9 @@ export function HeroVideo({ className }) {
 
     return () => cleanups.forEach((fn) => fn());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isDesktop]);
+
+  if (!isDesktop) return null;
 
   return (
     <div className={cn("absolute inset-0 h-full w-full overflow-hidden bg-[var(--color-ink)]", className)}>

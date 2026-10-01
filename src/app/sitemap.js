@@ -11,7 +11,7 @@ export default function sitemap() {
 
   // Core Landing and High-Value Discovery Pages
   const staticRoutes = [
-    { path: "", priority: 1.0, changeFrequency: "daily" },
+    { path: "", priority: 1.0, changeFrequency: "daily", images: [url("/images/hero-poster.webp"), url("/opengraph-image")] },
     { path: "/services", priority: 0.9, changeFrequency: "weekly" },
     { path: "/routes", priority: 0.9, changeFrequency: "weekly" },
     { path: "/destinations", priority: 0.85, changeFrequency: "weekly" },
@@ -28,6 +28,7 @@ export default function sitemap() {
     lastModified: now,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
+    ...(route.images ? { images: route.images } : {}),
   }));
 
   // 4 Core Cab Services (One-way, Round trip, Local, Airport)
@@ -38,23 +39,25 @@ export default function sitemap() {
     priority: 0.9,
   }));
 
-  // Dedicated Destination Pages
+  // Dedicated Destination Pages with Google Image sitemap tags
   const destinationRoutes = destinations.map((d) => ({
     url: url(`/destinations/${d.slug}`),
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.85,
+    ...(d.image ? { images: [url(d.image)] } : {}),
   }));
 
-  // Vehicle Fleet Pages
+  // Vehicle Fleet Pages with Google Image sitemap tags
   const fleetRoutes = fleet.map((v) => ({
     url: url(`/fleet/${v.slug}`),
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.8,
+    ...(v.image ? { images: [url(v.image)] } : {}),
   }));
 
-  // Tour Package Detail Pages
+  // Tour Package Detail Pages with Google Image sitemap tags
   const tourPackageRoutes = tourPackages
     .filter((p) => p.active !== false)
     .map((p) => ({
@@ -62,14 +65,16 @@ export default function sitemap() {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
+      ...(p.image ? { images: [url(p.image)] } : {}),
     }));
 
-  // Travel Guides and Blog Posts
+  // Travel Guides and Blog Posts with Google Image sitemap tags
   const blogRoutes = blogPosts.map((p) => ({
     url: url(`/blog/${p.slug}`),
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.75,
+    ...(p.image ? { images: [url(p.image)] } : {}),
   }));
 
   return [

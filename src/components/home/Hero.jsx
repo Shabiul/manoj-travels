@@ -23,6 +23,15 @@ import { business } from "@/config/business.config";
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-[var(--color-ink)] lg:min-h-[92svh]">
+      {/* High-speed LCP background poster (25 KiB) paints immediately on mobile and desktop */}
+      <img
+        src="/images/hero-poster.webp"
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "50% 50%" }}
+      />
       <HeroVideo />
       <div
         aria-hidden="true"
@@ -31,33 +40,24 @@ export function Hero() {
 
       <Container className="relative z-10 flex flex-col gap-10 pb-14 pt-28 md:pb-16 lg:min-h-[92svh] lg:flex-row lg:items-center lg:gap-12 lg:py-28">
         <div className="lg:flex-1">
-          <Reveal>
-            <h1 className="text-balance text-display max-w-3xl font-display text-[var(--color-text-on-dark)]">
-              Manoj Tours &amp; Travels
-            </h1>
-          </Reveal>
-          <Reveal delay={140}>
-            <p className="text-lead mt-5 max-w-lg text-[var(--color-text-on-dark-muted)]">
-              Manoj Taxi Service — local, outstation &amp; airport cabs across
-              Bangalore, available 24 × 7.
-            </p>
-          </Reveal>
+          <h1 className="text-balance text-display max-w-3xl font-display text-[var(--color-text-on-dark)]">
+            Manoj Tours &amp; Travels
+          </h1>
+          <p className="text-lead mt-5 max-w-lg text-[var(--color-text-on-dark-muted)]">
+            Manoj Taxi Service — local, outstation &amp; airport cabs across
+            Bangalore, available 24 × 7.
+          </p>
 
-          <Reveal delay={260}>
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              {/* The booking form sits right alongside this on desktop and
-                  just below on mobile — "Book Now" smoothly scrolls to it
-                  rather than opening a popup or navigating away. */}
-              <Button href="#book" variant="accent" size="lg">
-                Book Now
-              </Button>
-              <CallButton variant="inline" />
-              <WhatsAppButton variant="inline" />
-            </div>
-          </Reveal>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <Button href="#book" variant="accent" size="lg">
+              Book Now
+            </Button>
+            <CallButton variant="inline" />
+            <WhatsAppButton variant="inline" />
+          </div>
         </div>
 
-        <Reveal delay={200} className="lg:w-[440px] lg:shrink-0 xl:w-[480px]">
+        <div className="lg:w-[440px] lg:shrink-0 xl:w-[480px]">
           <div id="book" className="scroll-mt-24">
             <p className="text-eyebrow text-[var(--color-accent-soft)]">{business.availabilityLabel}</p>
             <h2 className="text-h3 mt-2 font-display text-[var(--color-text-on-dark)]">
@@ -65,7 +65,7 @@ export function Hero() {
             </h2>
             <BookingForm className="mt-4" />
           </div>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );

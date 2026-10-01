@@ -8,9 +8,9 @@ export function GoogleTag() {
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="google-tag-init" strategy="afterInteractive">
+      <Script id="google-tag-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

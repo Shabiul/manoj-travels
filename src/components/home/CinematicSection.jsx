@@ -30,7 +30,11 @@ export function CinematicSection() {
     <section className="relative h-[80vh] min-h-[480px] overflow-hidden bg-[var(--color-ink)]">
       <Reveal variant="scale" className="absolute inset-0">
         <div ref={parallaxRef} style={parallaxStyle} className="absolute inset-0 scale-110">
-          <Video src="/videos/sections/kerala.mp4" className={cn(kenBurnsEnabled && "kenburns")} />
+          <Video
+            src="/videos/sections/kerala.mp4"
+            poster="/images/kerala-poster.webp"
+            className={cn(kenBurnsEnabled && "kenburns")}
+          />
         </div>
         <div
           aria-hidden="true"

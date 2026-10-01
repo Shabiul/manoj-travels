@@ -4,10 +4,11 @@ import { DestinationEditorialGrid } from "@/components/destinations/DestinationE
 import { Button } from "@/components/ui/Button";
 import { destinations } from "@/data/destinations";
 
-// The full destination list — the exact same data (and images) as the
-// dedicated /destinations page, so the two stay in sync with zero risk of
-// drifting apart. No subset/filtering here on purpose.
+// Display top 6 premier destinations on homepage for an optimized mobile DOM size
+// and fast rendering, with direct links to browse all 28 on /destinations.
 export function DestinationsSection() {
+  const featuredDestinations = destinations.slice(0, 6);
+
   return (
     <Section tone="ink" id="destinations">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
@@ -21,7 +22,12 @@ export function DestinationsSection() {
         </Button>
       </div>
       <div className="mt-10">
-        <DestinationEditorialGrid destinations={destinations} />
+        <DestinationEditorialGrid destinations={featuredDestinations} />
+      </div>
+      <div className="mt-10 text-center">
+        <Button href="/destinations" variant="outline-dark" size="lg">
+          Explore All {destinations.length} Destinations &rarr;
+        </Button>
       </div>
     </Section>
   );

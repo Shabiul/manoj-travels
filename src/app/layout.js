@@ -23,10 +23,23 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link
+          rel="preload"
+          as="image"
+          href="/images/hero-poster.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+        <link
           rel="alternate"
           type="text/plain"
           href="/llms.txt"
           title="LLM Context"
+        />
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms-full.txt"
+          title="Full LLM Context"
         />
       </head>
       <body className="font-sans">

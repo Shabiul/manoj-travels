@@ -11,14 +11,13 @@ import { useEffect, useRef, useState } from "react";
  */
 export function useParallax(strength = 22) {
   const ref = useRef(null);
-  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const el = ref.current;
     if (!el || typeof window === "undefined") return;
 
     const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const isMobile = window.matchMedia?.("(max-width: 768px)").matches;
+    const isMobile = window.matchMedia?.("(max-width: 1023px)").matches;
     if (reduceMotion || isMobile || typeof IntersectionObserver === "undefined") return;
 
     let ticking = false;
@@ -26,12 +25,11 @@ export function useParallax(strength = 22) {
 
     const update = () => {
       ticking = false;
-      if (!inView) return;
+      if (!inView || !el) return;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || 1;
-      // -0.5 (top of viewport) .. 0.5 (bottom) — centred progress through view.
       const progress = (rect.top + rect.height / 2) / vh - 0.5;
-      setOffset(progress * strength);
+      el.style.transform = `translate3d(0, ${(progress * strength).toFixed(2)}px, 0)`;
     };
 
     const onScroll = () => {
@@ -56,5 +54,5 @@ export function useParallax(strength = 22) {
     };
   }, [strength]);
 
-  return [ref, { transform: `translate3d(0, ${offset.toFixed(2)}px, 0)` }];
+  return [ref, undefined];
 }

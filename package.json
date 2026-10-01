@@ -21,5 +21,12 @@
     "eslint": "^9.20.1",
     "eslint-config-next": "15.5.25",
     "tailwindcss": "^4.0.9"
-  }
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not IE 11"
+  ]
 }
