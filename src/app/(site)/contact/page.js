@@ -78,6 +78,7 @@ export default async function ContactPage() {
                     href={d.href}
                     target={d.label === "Address" ? "_blank" : undefined}
                     rel={d.label === "Address" ? "noopener noreferrer" : undefined}
+                    title={`${d.label}: ${d.value}`}
                     className="text-[19px] text-[var(--color-ink)] transition-colors duration-200 hover:text-[var(--color-accent-2)]"
                   >
                     {d.value}

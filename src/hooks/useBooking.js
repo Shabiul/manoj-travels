@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { validateEnquiry } from "@/lib/validation";
 import { resolveLocationName } from "@/lib/locationSearch";
+import { trackBookingConversion } from "@/lib/analytics";
 
 const baseState = {
   tripType: "one-way",
@@ -65,6 +66,7 @@ export function useBooking(overrides) {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
+      trackBookingConversion(payload.tripType, payload.vehicle);
       return { ok: true };
     } catch (err) {
       setStatus("error");

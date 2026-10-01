@@ -18,7 +18,7 @@ export function Breadcrumbs({ items }) {
                     {item.label}
                   </span>
                 ) : (
-                  <Link href={item.href} className="hover:text-[var(--color-ink)]">
+                  <Link href={item.href} title={`Navigate to ${item.label}`} className="hover:text-[var(--color-ink)]">
                     {item.label}
                   </Link>
                 )}

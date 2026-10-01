@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FormField } from "./FormField";
 import { Button } from "@/components/ui/Button";
 
+import { trackContactConversion } from "@/lib/analytics";
+
 export function ContactForm() {
   const [values, setValues] = useState({ name: "", phone: "", email: "", message: "" });
   const [status, setStatus] = useState("idle");
@@ -21,6 +23,7 @@ export function ContactForm() {
       });
       if (!res.ok) throw new Error("Failed");
       setStatus("success");
+      trackContactConversion({ name: values.name, phone: values.phone, email: values.email });
       setValues({ name: "", phone: "", email: "", message: "" });
     } catch {
       setStatus("error");

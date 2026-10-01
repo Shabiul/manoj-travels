@@ -2,6 +2,7 @@
 
 import { callLink } from "@/config/business.config";
 import { useBusinessInfo } from "@/components/common/SiteDataProvider";
+import { trackPhoneConversion } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 const PhoneIcon = (props) => (
@@ -17,20 +18,27 @@ const PhoneIcon = (props) => (
 export function CallButton({
   number,
   label = "Call Now",
+  title,
   variant = "inline",
   className,
 }) {
-  // Falls back to the live (admin-editable) Active Website Contact Number
-  // when no explicit number is passed in, so a change in /admin/settings
-  // updates every Call button on the site immediately.
   const business = useBusinessInfo();
-  const href = callLink(number || business.phone.active);
+  const activeNumber = number || business.phone.active;
+  const href = callLink(activeNumber);
+  const displayNum = business.phone.activeDisplay || business.phone.primaryDisplay;
+  const buttonTitle = title || `Call Manoj Tours and Travels at ${displayNum}`;
+
+  const handleClick = () => {
+    trackPhoneConversion(displayNum);
+  };
 
   if (variant === "floating") {
     return (
       <a
         href={href}
+        title={buttonTitle}
         aria-label="Call Manoj Tours and Travels"
+        onClick={handleClick}
         className={cn(
           "glass-accent flex h-16 w-16 items-center justify-center rounded-full text-[var(--color-text-on-dark)] shadow-[var(--shadow-lift)] transition-transform duration-200 hover:scale-105 active:scale-95",
           className
@@ -44,6 +52,8 @@ export function CallButton({
   return (
     <a
       href={href}
+      title={buttonTitle}
+      onClick={handleClick}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-[var(--radius-sm)] bg-[var(--color-ink)] px-6 py-3.5 text-[16px] font-medium text-[var(--color-text-on-dark)] shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] active:translate-y-0 active:scale-[0.98]",
         className

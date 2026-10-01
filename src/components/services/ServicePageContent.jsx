@@ -59,6 +59,7 @@ export async function ServicePageContent({ service }) {
               <Link
                 key={route.href}
                 href={route.href}
+                title={`Bangalore to ${route.label} taxi route and fare`}
                 className="rounded-full border border-[var(--color-border)] px-5 py-2.5 text-[15px] font-medium text-[var(--color-ink)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
               >
                 {route.label}

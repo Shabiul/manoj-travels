@@ -52,6 +52,7 @@ export function GalleryLightbox({ items, index, onClose, onNavigate }) {
         type="button"
         onClick={requestClose}
         aria-label="Close gallery"
+        title="Close image lightbox"
         className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-line-on-dark)] text-[var(--color-text-on-dark)] transition-colors hover:bg-white/10 sm:right-6 sm:top-6"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-5 w-5" aria-hidden="true">
@@ -63,6 +64,7 @@ export function GalleryLightbox({ items, index, onClose, onNavigate }) {
         type="button"
         onClick={() => onNavigate((index - 1 + items.length) % items.length)}
         aria-label="Previous image"
+        title="View previous image"
         className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--color-line-on-dark)] text-[var(--color-text-on-dark)] transition-colors hover:bg-white/10 sm:left-6"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-5 w-5" aria-hidden="true">
@@ -73,6 +75,7 @@ export function GalleryLightbox({ items, index, onClose, onNavigate }) {
         type="button"
         onClick={() => onNavigate((index + 1) % items.length)}
         aria-label="Next image"
+        title="View next image"
         className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--color-line-on-dark)] text-[var(--color-text-on-dark)] transition-colors hover:bg-white/10 sm:right-6"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-5 w-5" aria-hidden="true">
@@ -81,7 +84,7 @@ export function GalleryLightbox({ items, index, onClose, onNavigate }) {
       </button>
 
       <div className={`lightbox-frame relative h-[80vh] w-full max-w-4xl ${shown ? "is-shown" : ""}`}>
-        <NextImage src={item.src} alt={item.alt} fill sizes="90vw" className="object-contain" />
+        <NextImage src={item.src} alt={item.alt} title={item.alt} fill sizes="90vw" className="object-contain" />
       </div>
     </div>
   );

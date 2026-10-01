@@ -38,6 +38,7 @@ export function MobileMenu({ open, onClose }) {
         <button
           type="button"
           onClick={onClose}
+          title="Close menu"
           aria-label="Close menu"
           className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-line-accent)] text-[var(--color-ink)]"
         >
@@ -55,6 +56,7 @@ export function MobileMenu({ open, onClose }) {
             <Link
               href={item.href}
               onClick={onClose}
+              title={`Navigate to ${item.label}`}
               aria-current={isActive ? "page" : undefined}
               className={cn(
                 "block py-3 font-display text-2xl font-semibold transition-colors duration-200",
@@ -70,6 +72,7 @@ export function MobileMenu({ open, onClose }) {
                     key={child.href}
                     href={child.href}
                     onClick={onClose}
+                    title={`Book ${child.label}`}
                     className="py-2 text-base text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-accent-2)]"
                   >
                     {child.label}
@@ -85,7 +88,7 @@ export function MobileMenu({ open, onClose }) {
       <div className="grid grid-cols-1 gap-3 px-5 pb-8 pt-4">
         {/* Scrolls to the homepage's booking form (src/components/home/Hero.jsx,
             id="book") rather than navigating to /fleet or opening a popup. */}
-        <Button href="/#book" variant="accent" size="lg" onClick={onClose} className="w-full">
+        <Button href="/#book" variant="accent" size="lg" title="Book a cab online with Manoj Tours and Travels" onClick={onClose} className="w-full">
           Book Now
         </Button>
         <div className="grid grid-cols-2 gap-3">

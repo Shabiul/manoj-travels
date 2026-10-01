@@ -19,6 +19,7 @@ export function AboutKanyakumariImage() {
         <Image
           src="/images/destinations/kanyakumari.png"
           alt="Kanyakumari — one of the destinations Manoj Tours and Travels covers"
+          title="Kanyakumari — one of the destinations Manoj Tours and Travels covers"
           wrapperClassName="h-full w-full"
           className="object-cover"
           sizes="(min-width: 1024px) 45vw, 90vw"

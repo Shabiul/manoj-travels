@@ -28,6 +28,7 @@ export function Navigation({ tone = "dark" }) {
         >
           <Link
             href={item.href}
+            title={`Navigate to ${item.label} — Manoj Tours and Travels`}
             className={cn(
               "relative flex items-center gap-1 whitespace-nowrap rounded-[var(--radius-sm)] px-2 py-2.5 text-[15px] font-medium transition-colors duration-200",
               linkTone
@@ -72,6 +73,7 @@ export function Navigation({ tone = "dark" }) {
                   <Link
                     key={child.href}
                     href={child.href}
+                    title={`Explore ${child.label}: ${child.description}`}
                     className="block rounded-[var(--radius-md)] px-4 py-3 transition-colors hover:bg-[var(--color-paper-2)]"
                   >
                     <span className="block text-[16px] font-medium text-[var(--color-ink)]">

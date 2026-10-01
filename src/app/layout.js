@@ -22,6 +22,10 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googleadservices.com" />
+        <link rel="dns-prefetch" href="https://www.googleadservices.com" />
+        <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
+        <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
         <link
           rel="preload"
           as="image"

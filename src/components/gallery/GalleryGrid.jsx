@@ -23,6 +23,7 @@ export function GalleryGrid({ items }) {
             role="tab"
             aria-selected={category === cat}
             onClick={() => setCategory(cat)}
+            title={`Filter gallery by ${cat}`}
             className={cn(
               "rounded-[var(--radius-sm)] border px-4 py-2 text-[15px] font-medium transition-all duration-200",
               category === cat
@@ -41,12 +42,14 @@ export function GalleryGrid({ items }) {
             <button
               type="button"
               onClick={() => setOpenIndex(i)}
+              title={`View full image: ${item.alt}`}
               className="group relative block w-full overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-soft)] transition-all duration-300 hover:shadow-[var(--shadow-lift)]"
             >
               <div className="img-hover-sweep">
                 <NextImage
                   src={item.src}
                   alt={item.alt}
+                  title={item.alt}
                   width={640}
                   height={480}
                   sizes="(min-width: 1024px) 32vw, (min-width: 640px) 48vw, 100vw"

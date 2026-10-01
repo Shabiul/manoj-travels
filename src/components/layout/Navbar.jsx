@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { callLink } from "@/config/business.config";
 import { useBusinessInfo } from "@/components/common/SiteDataProvider";
 import { useScroll } from "@/hooks/useScroll";
+import { trackPhoneConversion, trackWhatsAppConversion } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -56,6 +57,7 @@ export function Navbar() {
               tucked away behind a menu. */}
           <a
             href={phoneHref}
+            title={`Call Manoj Tours and Travels at ${business.phone.activeDisplay}`}
             className={cn(
               "hidden shrink-0 items-center gap-1.5 whitespace-nowrap rounded-[var(--radius-full)] px-1.5 py-2 text-[14px] font-medium transition-colors min-[1440px]:flex",
               scrolled ? "text-[var(--color-ink)] hover:text-[var(--color-accent-2)]" : "text-[var(--color-text-on-dark)] hover:text-[var(--color-accent-soft)]"
@@ -80,6 +82,7 @@ export function Navbar() {
               id="book") rather than navigating to /fleet or opening a popup. */}
           <Link
             href="/#book"
+            title="Book a cab online with Manoj Tours and Travels"
             className="glass-accent hidden shrink-0 items-center justify-center whitespace-nowrap rounded-full px-5 py-2.5 text-[15px] font-semibold tracking-[-0.01em] text-[var(--color-text-on-dark)] shadow-[var(--shadow-soft)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] active:translate-y-0 active:scale-[0.98] sm:inline-flex min-[1440px]:px-7 min-[1440px]:py-3.5 min-[1440px]:text-[17px]"
           >
             Book Now
@@ -90,6 +93,8 @@ export function Navbar() {
               largest item inside the drawer. */}
           <a
             href={phoneHref}
+            onClick={() => trackPhoneConversion(business.phone.activeDisplay)}
+            title={`Call Manoj Tours and Travels at ${business.phone.activeDisplay}`}
             aria-label="Call Manoj Tours and Travels"
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-full border transition-all active:scale-90 sm:hidden",
@@ -105,6 +110,8 @@ export function Navbar() {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={trackWhatsAppConversion}
+            title="Chat on WhatsApp with Manoj Tours and Travels"
             aria-label="WhatsApp Manoj Tours and Travels"
             className="glass-light flex h-11 w-11 items-center justify-center rounded-full text-[var(--color-accent-2)] transition-transform hover:scale-105 active:scale-95 sm:hidden"
           >
@@ -117,6 +124,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
+            title="Open Navigation Menu"
             aria-label="Open menu"
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-full border transition-all active:scale-90 min-[1440px]:hidden",

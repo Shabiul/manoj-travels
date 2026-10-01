@@ -80,6 +80,7 @@ export default function RoutesPage() {
             <a
               key={group.slug}
               href={`#${group.slug}`}
+              title={`Jump to ${group.region} taxi routes`}
               className="shrink-0 rounded-full border border-[var(--color-line-on-dark)] px-4 py-2 text-[14px] font-medium text-[var(--color-text-on-dark-muted)] transition-colors hover:border-[var(--color-accent-soft)] hover:text-[var(--color-text-on-dark)]"
             >
               {group.region} <span className="opacity-70">({group.count})</span>
@@ -106,6 +107,7 @@ export default function RoutesPage() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    title={`Bangalore to ${item.name} taxi and cab service`}
                     className="group rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-paper)] p-5 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-lift)]"
                   >
                     <p className="text-[17px] font-display font-medium text-[var(--color-ink)]">
@@ -165,7 +167,7 @@ export default function RoutesPage() {
             className="mx-auto"
           />
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button href="/contact" variant="accent">
+            <Button href="/contact" variant="accent" title="Enquire about custom outstation taxi route">
               Enquire About a Route
             </Button>
             <WhatsAppButton message="Hello Manoj Tours and Travels, I would like to check a taxi route and fare from Bangalore." />

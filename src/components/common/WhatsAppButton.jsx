@@ -1,6 +1,7 @@
 "use client";
 
 import { useBusinessInfo } from "@/components/common/SiteDataProvider";
+import { trackWhatsAppConversion } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 const WhatsAppIcon = (props) => (
@@ -10,21 +11,22 @@ const WhatsAppIcon = (props) => (
   </svg>
 );
 
-// A muted, warm-glass treatment rather than WhatsApp's bright default
-// green — the icon shape stays recognisable, but the colour reads as part
-// of the site's ivory/espresso/champagne palette, not a foreign brand hit.
 export function WhatsAppButton({
   message,
   label = "WhatsApp Enquiry",
+  title,
   variant = "inline",
   className,
 }) {
-  // The WhatsApp number tracks the live (admin-editable) primary phone
-  // number, so a change in /admin/settings updates this button too.
   const business = useBusinessInfo();
   const href = `https://wa.me/${business.whatsapp.number}?text=${encodeURIComponent(
     message || business.whatsapp.defaultMessage
   )}`;
+  const buttonTitle = title || "Chat on WhatsApp with Manoj Tours and Travels";
+
+  const handleClick = () => {
+    trackWhatsAppConversion();
+  };
 
   if (variant === "floating") {
     return (
@@ -32,7 +34,9 @@ export function WhatsAppButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        title={buttonTitle}
         aria-label="Enquire on WhatsApp"
+        onClick={handleClick}
         className={cn(
           "glass-light flex h-16 w-16 items-center justify-center rounded-full text-[var(--color-accent-2)] transition-transform duration-200 hover:scale-105 active:scale-95",
           className
@@ -48,6 +52,8 @@ export function WhatsAppButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      title={buttonTitle}
+      onClick={handleClick}
       className={cn(
         "glass-light inline-flex items-center justify-center gap-2 rounded-[var(--radius-sm)] px-6 py-3.5 text-[16px] font-medium text-[var(--color-ink)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] active:translate-y-0 active:scale-[0.98]",
         className

@@ -93,6 +93,7 @@ export default function DestinationPage({ params }) {
         <div className="mt-8 text-center">
           <a
             href="/routes"
+            title="See all outstation taxi routes from Bangalore"
             className="text-[15px] font-medium text-[var(--color-accent)] underline underline-offset-4"
           >
             See all outstation taxi routes from Bangalore →

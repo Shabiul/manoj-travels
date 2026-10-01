@@ -14,6 +14,7 @@ export function SocialLinks({ links = [], className }) {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
+            title={`Follow Manoj Tours and Travels on ${link.label}`}
             className="text-sm text-[var(--color-text-on-dark-muted)] hover:text-[var(--color-text-on-dark)]"
           >
             {link.label}

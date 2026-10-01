@@ -1,24 +1,31 @@
-import Script from "next/script";
-
 const GTAG_ID = process.env.NEXT_PUBLIC_GTAG_ID || "AW-10846077480";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export function GoogleTag() {
+  if (!GTAG_ID) return null;
+
   return (
     <>
-      <Script
+      <script
+        async
         src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}
-        strategy="lazyOnload"
       />
-      <Script id="google-tag-init" strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GTAG_ID}');
-          ${GA_ID ? `gtag('config', '${GA_ID}');` : ""}
-        `}
-      </Script>
+      <script
+        id="google-tag-init"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', '${GTAG_ID}', {
+              page_path: window.location.pathname,
+              send_page_view: true
+            });
+            ${GA_ID ? `gtag('config', '${GA_ID}', { page_path: window.location.pathname });` : ""}
+          `,
+        }}
+      />
     </>
   );
 }

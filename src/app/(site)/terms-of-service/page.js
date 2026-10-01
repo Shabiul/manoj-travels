@@ -167,12 +167,12 @@ export default function TermsOfServicePage() {
               Address: {business.address.full}
               <br />
               Phone:{" "}
-              <a href={`tel:+91${business.phone.primary}`} className="text-[var(--color-accent)] underline">
+              <a href={`tel:+91${business.phone.primary}`} title={`Call Manoj Tours and Travels at ${business.phone.primaryDisplay}`} className="text-[var(--color-accent)] underline">
                 {business.phone.primaryDisplay}
               </a>
               <br />
               Email:{" "}
-              <a href={`mailto:${business.email}`} className="text-[var(--color-accent)] underline">
+              <a href={`mailto:${business.email}`} title={`Email Manoj Tours and Travels at ${business.email}`} className="text-[var(--color-accent)] underline">
                 {business.email}
               </a>
             </p>

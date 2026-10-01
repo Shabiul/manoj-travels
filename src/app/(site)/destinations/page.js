@@ -57,7 +57,7 @@ export default function DestinationsPage() {
         <div className="mt-8 rounded-[var(--radius-lg)] bg-[var(--color-paper-2)] px-6 py-5 text-center">
           <p className="text-[15px] text-[var(--color-text-muted)]">
             Don&rsquo;t see your town? We cover every district and taluk across Karnataka —{" "}
-            <a href="/routes" className="font-medium text-[var(--color-accent-2)] underline underline-offset-4">
+            <a href="/routes" title="View full outstation taxi route coverage list from Bangalore" className="font-medium text-[var(--color-accent-2)] underline underline-offset-4">
               see our full coverage list
             </a>
             , or just share your pickup and drop points.

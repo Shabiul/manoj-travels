@@ -84,12 +84,12 @@ export default function PrivacyPolicyPage() {
                 {business.address.full}
               </span>
               Primary Phone:{" "}
-              <a href={`tel:+91${business.phone.primary}`} className="text-[var(--color-accent)] underline">
+              <a href={`tel:+91${business.phone.primary}`} title={`Call Manoj Tours and Travels at ${business.phone.primaryDisplay}`} className="text-[var(--color-accent)] underline">
                 {business.phone.primaryDisplay}
               </a>
               <br />
               Email:{" "}
-              <a href={`mailto:${business.email}`} className="text-[var(--color-accent)] underline">
+              <a href={`mailto:${business.email}`} title={`Email Manoj Tours and Travels at ${business.email}`} className="text-[var(--color-accent)] underline">
                 {business.email}
               </a>
             </p>
@@ -149,11 +149,11 @@ export default function PrivacyPolicyPage() {
               You have the right to request a review of the personal contact details we hold for you, or
               to request that your phone number and booking history be purged from our active records. To
               exercise these rights, please contact us directly at{" "}
-              <a href={`mailto:${business.email}`} className="text-[var(--color-accent)] underline">
+              <a href={`mailto:${business.email}`} title={`Email Manoj Tours and Travels at ${business.email}`} className="text-[var(--color-accent)] underline">
                 {business.email}
               </a>{" "}
               or call{" "}
-              <a href={`tel:+91${business.phone.primary}`} className="text-[var(--color-accent)] underline">
+              <a href={`tel:+91${business.phone.primary}`} title={`Call Manoj Tours and Travels at ${business.phone.primaryDisplay}`} className="text-[var(--color-accent)] underline">
                 {business.phone.primaryDisplay}
               </a>
               .

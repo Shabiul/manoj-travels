@@ -66,7 +66,7 @@ export default function BlogPostPage({ params }) {
                 </span>
                 <div>
                   <span className="font-semibold text-[var(--color-ink)]">
-                    <Link href="/about#founder" className="hover:underline">
+                    <Link href="/about#founder" title="View founder profile of Manoj Kumar" className="hover:underline">
                       {post.author || "Manoj Kumar"}
                     </Link>
                   </span>
@@ -105,7 +105,7 @@ export default function BlogPostPage({ params }) {
           </header>
 
           <div className="relative mt-6 h-64 overflow-hidden rounded-[var(--radius-lg)] md:h-96">
-            <Image src={post.image} alt={post.title} wrapperClassName="h-full" />
+            <Image src={post.image} alt={post.title} title={post.title} wrapperClassName="h-full" />
           </div>
 
           {/* Answer-First Structure: Inverted-Pyramid Quick Answer Box */}
@@ -157,6 +157,7 @@ export default function BlogPostPage({ params }) {
                       href={citation.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      title={`Visit official source: ${citation.sourceName}`}
                       className="font-medium text-[var(--color-accent)] underline decoration-[var(--color-accent)]/40 underline-offset-2 hover:text-[var(--color-accent-strong,#b84000)]"
                     >
                       {citation.sourceName} ↗

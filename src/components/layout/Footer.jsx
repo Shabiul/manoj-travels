@@ -70,7 +70,11 @@ export function Footer() {
             <ul className="mt-5 space-y-3.5">
               {footerNav.explore.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-[17px] text-[var(--color-text-on-dark-muted)] transition-colors hover:text-[var(--color-accent-soft)]">
+                  <Link
+                    href={link.href}
+                    title={`Explore ${link.label} — Manoj Tours and Travels`}
+                    className="text-[17px] text-[var(--color-text-on-dark-muted)] transition-colors hover:text-[var(--color-accent-soft)]"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -83,7 +87,11 @@ export function Footer() {
             <ul className="mt-5 space-y-3.5">
               {footerNav.services.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-[17px] text-[var(--color-text-on-dark-muted)] transition-colors hover:text-[var(--color-accent-soft)]">
+                  <Link
+                    href={link.href}
+                    title={`Book ${link.label} with Manoj Tours and Travels`}
+                    className="text-[17px] text-[var(--color-text-on-dark-muted)] transition-colors hover:text-[var(--color-accent-soft)]"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -95,22 +103,41 @@ export function Footer() {
             <p className="font-display text-[21px] font-semibold text-[var(--color-text-on-dark)]">Contact</p>
             <ul className="mt-5 space-y-3.5 text-[17px] text-[var(--color-text-on-dark-muted)]">
               <li>
-                <ContactLine icon={<PhoneIcon className={iconClass} />} href={`tel:+91${business.phone.primary}`} className="font-medium !text-[var(--color-text-on-dark)]">
+                <ContactLine
+                  icon={<PhoneIcon className={iconClass} />}
+                  href={`tel:+91${business.phone.primary}`}
+                  title={`Call Manoj Tours and Travels primary phone: ${business.phone.primaryDisplay}`}
+                  className="font-medium !text-[var(--color-text-on-dark)]"
+                >
                   {business.phone.primaryDisplay}
                 </ContactLine>
               </li>
               <li>
-                <ContactLine icon={<PhoneIcon className={iconClass} />} href={`tel:+91${business.phone.secondary}`}>
+                <ContactLine
+                  icon={<PhoneIcon className={iconClass} />}
+                  href={`tel:+91${business.phone.secondary}`}
+                  title={`Call Manoj Tours and Travels alternate phone: ${business.phone.secondaryDisplay}`}
+                >
                   {business.phone.secondaryDisplay}
                 </ContactLine>
               </li>
               <li>
-                <ContactLine icon={<MailIcon className={iconClass} />} href={`mailto:${business.email}`}>
+                <ContactLine
+                  icon={<MailIcon className={iconClass} />}
+                  href={`mailto:${business.email}`}
+                  title={`Send email to ${business.email}`}
+                >
                   {business.email}
                 </ContactLine>
               </li>
               <li>
-                <ContactLine icon={<PinIcon className={iconClass} />} href={mapsLink} target="_blank" rel="noopener noreferrer">
+                <ContactLine
+                  icon={<PinIcon className={iconClass} />}
+                  href={mapsLink}
+                  title="View Manoj Tours and Travels office on Google Maps"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {business.address.full}
                 </ContactLine>
               </li>
@@ -132,6 +159,7 @@ export function Footer() {
               <Link
                 key={route.href}
                 href={route.href}
+                title={`Book taxi from ${route.label}`}
                 className="text-[16px] text-[var(--color-text-on-dark-muted)] transition-colors hover:text-[var(--color-accent-soft)]"
               >
                 {route.label}
@@ -139,6 +167,7 @@ export function Footer() {
             ))}
             <Link
               href="/destinations"
+              title="Browse all outstation tour destinations across South India"
               className="text-[16px] font-medium text-[var(--color-accent-soft)] transition-colors hover:text-[var(--color-text-on-dark)]"
             >
               All Destinations →
@@ -167,6 +196,7 @@ export function Footer() {
             <div className="mt-2 flex flex-wrap items-center gap-4 text-[14px] text-[var(--color-text-on-dark-muted)]/80">
               <Link
                 href="/privacy-policy"
+                title="Read Manoj Tours and Travels Privacy Policy"
                 className="underline underline-offset-4 decoration-[var(--color-line-on-dark)] transition-colors hover:text-[var(--color-accent-soft)]"
               >
                 Privacy Policy
@@ -174,6 +204,7 @@ export function Footer() {
               <span>•</span>
               <Link
                 href="/terms-of-service"
+                title="Read Manoj Tours and Travels Terms of Service"
                 className="underline underline-offset-4 decoration-[var(--color-line-on-dark)] transition-colors hover:text-[var(--color-accent-soft)]"
               >
                 Terms of Service
@@ -186,6 +217,7 @@ export function Footer() {
               href="https://www.naazailabs.com/"
               target="_blank"
               rel="noopener noreferrer"
+              title="Visit Naaz AI Labs website"
               className="underline decoration-[var(--color-text-on-dark-muted)]/40 underline-offset-2 transition-colors hover:text-[var(--color-accent-soft)]"
             >
               Naaz AI Labs

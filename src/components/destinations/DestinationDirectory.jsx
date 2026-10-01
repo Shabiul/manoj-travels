@@ -137,6 +137,7 @@ export function DestinationDirectory({ items }) {
                   <Link
                     key={`${item.name}-${i}`}
                     href={item.href}
+                    title={`Explore Bangalore to ${item.name} taxi route details`}
                     className="group block transition-colors hover:text-[var(--color-accent-soft)]"
                   >
                     {Row}

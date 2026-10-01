@@ -32,9 +32,14 @@ export function Button({
   size = "md",
   className,
   children,
+  title,
   ...props
 }) {
   const classes = cn(base, variants[variant], sizes[size], className);
+  const buttonTitle =
+    title ||
+    (typeof children === "string" ? children : undefined) ||
+    (href ? `Navigate to ${href}` : undefined);
 
   if (href) {
     const isExternal = /^https?:|^tel:|^mailto:/.test(href);
@@ -42,6 +47,7 @@ export function Button({
       return (
         <a
           href={href}
+          title={buttonTitle}
           className={classes}
           target={href.startsWith("http") ? "_blank" : undefined}
           rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
@@ -52,7 +58,7 @@ export function Button({
       );
     }
     return (
-      <Link href={href} className={classes} {...props}>
+      <Link href={href} title={buttonTitle} className={classes} {...props}>
         {children}
       </Link>
     );
@@ -60,7 +66,7 @@ export function Button({
 
   const Tag = as || "button";
   return (
-    <Tag className={classes} {...props}>
+    <Tag className={classes} title={buttonTitle} {...props}>
       {children}
     </Tag>
   );

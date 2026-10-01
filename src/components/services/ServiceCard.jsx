@@ -5,11 +5,16 @@ import { Card } from "@/components/ui/Card";
 export function ServiceCard({ service }) {
   return (
     <Card className="group overflow-hidden">
-      <Link href={`/services/${service.slug}`} className="block">
+      <Link
+        href={`/services/${service.slug}`}
+        title={`View pricing and details for ${service.name} — Manoj Tours and Travels`}
+        className="block"
+      >
         <div className="img-hover-sweep relative h-64 w-full overflow-hidden bg-[var(--color-paper-2)]">
           <Image
             src={service.heroImage}
             alt={`${service.name} — Manoj Tours and Travels`}
+            title={`${service.name} — Taxi service in Bangalore`}
             wrapperClassName="h-64 w-full"
             className="object-cover object-bottom transition-transform duration-700 ease-out group-hover:scale-105"
             sizes="(min-width: 1024px) 25vw, 50vw"

@@ -11,12 +11,14 @@ export function DestinationCard({ destination, className }) {
   return (
     <Link
       href={`/destinations/${destination.slug}`}
+      title={`Plan a road trip from Bangalore to ${destination.name} with Manoj Tours and Travels`}
       className={`group relative block aspect-square w-full overflow-hidden rounded-[1.5rem] shadow-[var(--shadow-soft)] transition-shadow duration-500 hover:shadow-[var(--shadow-lift)] ${className || ""}`}
     >
       <div className="img-hover-sweep h-full w-full">
         <Image
           src={destination.image}
           alt={`Bangalore to ${destination.name} taxi service — Manoj Tours and Travels`}
+          title={`Bangalore to ${destination.name} outstation taxi trip`}
           wrapperClassName="h-full"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />

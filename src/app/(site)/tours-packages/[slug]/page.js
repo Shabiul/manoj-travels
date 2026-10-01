@@ -108,6 +108,7 @@ export default async function TourPackageDetailPage({ params }) {
                 See the full{" "}
                 <a
                   href={`/destinations/${relatedDestination.slug}`}
+                  title={`View ${relatedDestination.name} destination guide`}
                   className="font-medium text-[var(--color-accent-2)] underline underline-offset-4"
                 >
                   {relatedDestination.name} destination guide

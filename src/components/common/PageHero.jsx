@@ -22,6 +22,7 @@ export function PageHero({ eyebrow, title, description, image, imageAlt = "", ob
           <Image
             src={image}
             alt={imageAlt}
+            title={imageAlt || title || "Manoj Tours and Travels"}
             wrapperClassName="h-full w-full"
             className={objectPosition}
             priority

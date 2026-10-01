@@ -39,7 +39,11 @@ export function DestinationDetails({ destination }) {
             Book this trip via{" "}
             {services.map((s, i) => (
               <span key={s.href}>
-                <Link href={s.href} className="font-medium text-[var(--color-accent-2)] underline underline-offset-4">
+                <Link
+                  href={s.href}
+                  title={`Book ${destination.name} trip via ${s.label}`}
+                  className="font-medium text-[var(--color-accent-2)] underline underline-offset-4"
+                >
                   {s.label}
                 </Link>
                 {i < services.length - 1 ? " or " : ""}
@@ -56,7 +60,7 @@ export function DestinationDetails({ destination }) {
           Tell us your travel dates and group size — we&rsquo;ll suggest the right vehicle and share the fare.
         </p>
         <div className="mt-5 flex flex-col gap-3">
-          <Button href="/contact" variant="accent" className="w-full">
+          <Button href="/contact" variant="accent" title={`Enquire about booking trip to ${destination.name}`} className="w-full">
             Enquire About This Trip
           </Button>
           <WhatsAppButton

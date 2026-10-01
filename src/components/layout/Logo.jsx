@@ -17,6 +17,7 @@ export function Logo({ tone = "dark", size = "md", compactOnMobile = false, clas
   return (
     <Link
       href="/"
+      title="Manoj Tours and Travels — Home"
       className={cn("group flex items-center gap-2.5", className)}
       aria-label="Manoj Tours and Travels — Home"
     >
@@ -29,6 +30,7 @@ export function Logo({ tone = "dark", size = "md", compactOnMobile = false, clas
         <Image
           src={logoSrc}
           alt="Manoj Tours and Travels crest"
+          title="Manoj Tours and Travels brand crest"
           fill
           sizes="56px"
           className="object-cover"

@@ -39,6 +39,7 @@ export function Video({ src, poster, posterAlt, alt, className, wrapperClassName
         <img
           src={poster}
           alt={posterAlt || alt || "Manoj Tours and Travels — Scenic South India outstation destination"}
+          title={posterAlt || alt || "Manoj Tours and Travels — Scenic South India outstation destination"}
           className={cn(
             "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
             !failed && shouldLoad ? "opacity-0" : "opacity-100",

@@ -38,12 +38,14 @@ export default function BlogPage() {
           <Reveal key={post.slug} delay={(index % 3) * 90}>
             <Link
               href={`/blog/${post.slug}`}
+              title={`Read travel guide: ${post.title}`}
               className="group block overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-paper)] shadow-[var(--shadow-soft)] transition-shadow hover:shadow-[var(--shadow-lift)]"
             >
               <div className="relative h-44">
                 <Image
                   src={post.image}
                   alt={post.title}
+                  title={post.title}
                   wrapperClassName="h-44"
                   className="transition-transform duration-500 group-hover:scale-105"
                 />

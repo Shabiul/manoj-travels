@@ -16,11 +16,16 @@ export function TourPackageCard({ pkg }) {
 
   return (
     <div className="flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-paper)] shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]">
-      <Link href={href} className="img-hover-sweep relative block aspect-[4/3] w-full">
+      <Link
+        href={href}
+        title={`View itinerary and pricing for ${pkg.title}`}
+        className="img-hover-sweep relative block aspect-[4/3] w-full"
+      >
         {pkg.image ? (
           <Image
             src={pkg.image}
             alt={`${pkg.title} — Manoj Tours and Travels`}
+            title={`${pkg.title} — South India tour package`}
             wrapperClassName="h-full"
             className="transition-transform duration-700 ease-out hover:scale-110"
           />
@@ -48,7 +53,7 @@ export function TourPackageCard({ pkg }) {
       </Link>
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
-        <Link href={href}>
+        <Link href={href} title={`View ${pkg.title} details`}>
           <h3 className="text-card-title font-display text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent-2)]">
             {pkg.title}
           </h3>
@@ -75,7 +80,7 @@ export function TourPackageCard({ pkg }) {
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button href="/contact" variant="accent">
+          <Button href="/contact" variant="accent" title={`Enquire about ${pkg.title} tour package`}>
             Enquire
           </Button>
           <WhatsAppButton message={`Hello Manoj Tours and Travels, I would like to enquire about the "${pkg.title}" package.`} />
@@ -83,6 +88,7 @@ export function TourPackageCard({ pkg }) {
 
         <Link
           href={href}
+          title={`View full itinerary for ${pkg.title}`}
           className="mt-5 text-[15px] font-medium text-[var(--color-accent-2)] underline underline-offset-4"
         >
           View package &amp; itinerary →

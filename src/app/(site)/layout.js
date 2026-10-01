@@ -6,6 +6,7 @@ import { SiteDataProvider } from "@/components/common/SiteDataProvider";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import { WebSiteSchema } from "@/components/seo/WebSiteSchema";
 import { LocalBusinessSchema } from "@/components/seo/LocalBusinessSchema";
+import { GoogleAdsClickListener } from "@/components/seo/GoogleAdsClickListener";
 import { getBusinessInfo, getImageOverrides } from "@/lib/siteContent";
 
 // Re-checked periodically so admin edits (pricing, images, business info)
@@ -21,12 +22,14 @@ export default async function SiteLayout({ children }) {
 
   return (
     <SiteDataProvider businessInfo={businessInfo} imageOverrides={imageOverrides}>
+      <GoogleAdsClickListener />
       <OrganizationSchema />
       <WebSiteSchema />
       <LocalBusinessSchema />
       <ScrollToTop />
       <a
         href="#main-content"
+        title="Skip to main content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[var(--color-ink)] focus:px-4 focus:py-2 focus:text-[var(--color-text-on-dark)]"
       >
         Skip to content

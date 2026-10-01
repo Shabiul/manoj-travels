@@ -27,6 +27,7 @@ export function Hero() {
       <img
         src="/images/hero-poster.webp"
         alt="Manoj Tours and Travels — 24x7 local, outstation and airport taxi service in Bangalore"
+        title="Manoj Tours and Travels — 24x7 local, outstation and airport taxi service in Bangalore"
         fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "50% 50%" }}
@@ -48,7 +49,7 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Button href="#book" variant="accent" size="lg">
+            <Button href="#book" variant="accent" size="lg" title="Book a cab online with Manoj Tours and Travels">
               Book Now
             </Button>
             <CallButton variant="inline" />
