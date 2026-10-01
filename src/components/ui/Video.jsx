@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
  * scrolls near the viewport, and falls back to a static poster if playback
  * fails (or the visitor has data-saver / reduced motion preferences).
  */
-export function Video({ src, poster, className, wrapperClassName, priority = false }) {
+export function Video({ src, poster, posterAlt, alt, className, wrapperClassName, priority = false }) {
   const ref = useRef(null);
   const [shouldLoad, setShouldLoad] = useState(priority);
   const [failed, setFailed] = useState(false);
@@ -38,8 +38,7 @@ export function Video({ src, poster, className, wrapperClassName, priority = fal
       {poster && (
         <img
           src={poster}
-          alt=""
-          aria-hidden="true"
+          alt={posterAlt || alt || "Manoj Tours and Travels — Scenic South India outstation destination"}
           className={cn(
             "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
             !failed && shouldLoad ? "opacity-0" : "opacity-100",

@@ -44,6 +44,11 @@ export function buildMetadata({
     keywords: keywords || defaultSeo.keywords,
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        "en-IN": canonicalUrl,
+        en: canonicalUrl,
+        "x-default": canonicalUrl,
+      },
     },
     robots: noIndex
       ? {
@@ -74,6 +79,14 @@ export function buildMetadata({
       siteName: siteConfig.name,
       locale: siteConfig.locale,
       type,
+      ...(type === "article"
+        ? {
+            publishedTime: "2025-01-15T09:00:00+05:30",
+            modifiedTime: "2026-03-29T10:00:00+05:30",
+            authors: ["Manoj Kumar"],
+            section: "Bangalore Taxi & Outstation Travel",
+          }
+        : {}),
       images: [
         {
           url: ogImageUrl,

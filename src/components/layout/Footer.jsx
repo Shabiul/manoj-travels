@@ -158,14 +158,29 @@ export function Footer() {
           </p>
         </div>
 
-        {/* Bottom row — copyright only; phone/email/address live in the
-            Contact column above, not duplicated here. */}
-        <div className="mt-8 border-t border-[var(--color-line-on-dark)] pt-7">
-
+        {/* Bottom row — copyright, legal links, credit */}
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-[var(--color-line-on-dark)] pt-7 sm:flex-row sm:items-center">
+          <div>
+            <p className="text-[15px] text-[var(--color-text-on-dark-muted)]/70">
+              © {year} Manoj Tours and Travels (Manoj Taxi Service). All rights reserved.
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-4 text-[14px] text-[var(--color-text-on-dark-muted)]/80">
+              <Link
+                href="/privacy-policy"
+                className="underline underline-offset-4 decoration-[var(--color-line-on-dark)] transition-colors hover:text-[var(--color-accent-soft)]"
+              >
+                Privacy Policy
+              </Link>
+              <span>•</span>
+              <Link
+                href="/terms-of-service"
+                className="underline underline-offset-4 decoration-[var(--color-line-on-dark)] transition-colors hover:text-[var(--color-accent-soft)]"
+              >
+                Terms of Service
+              </Link>
+            </div>
+          </div>
           <p className="text-[15px] text-[var(--color-text-on-dark-muted)]/70">
-            © {year} Manoj Tours and Travels (Manoj Taxi Service). All rights reserved.
-          </p>
-          <p className="mt-2 text-[15px] text-[var(--color-text-on-dark-muted)]/70">
             Designed &amp; Developed by{" "}
             <a
               href="https://www.naazailabs.com/"

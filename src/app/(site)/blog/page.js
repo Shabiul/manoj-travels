@@ -49,7 +49,26 @@ export default function BlogPage() {
                 />
               </div>
               <div className="p-5">
-                <h2 className="font-display text-lg text-[var(--color-ink)]">{post.title}</h2>
+                <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)]">
+                  <span>By {post.author || "Manoj Kumar"}</span>
+                  <span>•</span>
+                  <time dateTime={post.dateModified || post.datePublished}>
+                    {new Date(post.dateModified || post.datePublished).toLocaleDateString("en-IN", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </time>
+                  {post.readingTime && (
+                    <>
+                      <span>•</span>
+                      <span>{post.readingTime}</span>
+                    </>
+                  )}
+                </div>
+                <h2 className="mt-2 font-display text-lg text-[var(--color-ink)] transition-colors group-hover:text-[var(--color-accent)]">
+                  {post.title}
+                </h2>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{post.excerpt}</p>
               </div>
             </Link>

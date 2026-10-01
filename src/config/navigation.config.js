@@ -68,4 +68,8 @@ export const footerNav = {
     { label: "Local Cabs", href: "/services/local-cabs" },
     { label: "Airport Transfer", href: "/services/airport-pickup-drop" },
   ],
+  legal: [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+  ],
 };

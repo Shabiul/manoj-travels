@@ -23,6 +23,8 @@ export default function sitemap() {
     { path: "/blog", priority: 0.8, changeFrequency: "weekly" },
     { path: "/testimonials", priority: 0.75, changeFrequency: "monthly" },
     { path: "/gallery", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/privacy-policy", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/terms-of-service", priority: 0.6, changeFrequency: "monthly" },
   ].map((route) => ({
     url: url(route.path),
     lastModified: now,

@@ -26,8 +26,7 @@ export function Hero() {
       {/* High-speed LCP background poster (25 KiB) paints immediately on mobile and desktop */}
       <img
         src="/images/hero-poster.webp"
-        alt=""
-        aria-hidden="true"
+        alt="Manoj Tours and Travels — 24x7 local, outstation and airport taxi service in Bangalore"
         fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "50% 50%" }}

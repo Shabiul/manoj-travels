@@ -59,6 +59,13 @@ export function localBusinessSchema() {
     url: siteConfig.url,
     telephone: business.phone.primaryIntl,
     email: business.email,
+    founder: {
+      "@type": "Person",
+      "@id": url("/about#founder"),
+      name: "Manoj Kumar",
+      jobTitle: "Founder & Operations Head",
+      url: url("/about"),
+    },
     priceRange: "₹₹",
     currenciesAccepted: "INR",
     paymentAccepted: "Cash, UPI, Credit Card, Debit Card, Net Banking",
@@ -173,6 +180,13 @@ export function organizationSchema() {
     image: url("/opengraph-image"),
     telephone: business.phone.primaryIntl,
     email: business.email,
+    founder: {
+      "@type": "Person",
+      "@id": url("/about#founder"),
+      name: "Manoj Kumar",
+      jobTitle: "Founder & Managing Director",
+      url: url("/about"),
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: `${business.address.line1}, ${business.address.line2}, ${business.address.line3}`,
@@ -382,7 +396,8 @@ export function vehicleSchema(vehicle) {
 }
 
 /**
- * Article / BlogPosting Schema for Travel Guides
+ * Article / BlogPosting Schema for Travel Guides with Author & Date Markup
+ * Optimizes E-E-A-T trust signals and AI engine citation provenance.
  */
 export function articleSchema({
   title,
@@ -391,6 +406,8 @@ export function articleSchema({
   slug,
   datePublished = "2025-01-15T09:00:00+05:30",
   dateModified = "2026-03-29T10:00:00+05:30",
+  authorName = "Manoj Kumar",
+  authorRole = "Founder & Route Operations Specialist",
 }) {
   return {
     "@context": "https://schema.org",
@@ -408,10 +425,67 @@ export function articleSchema({
       "@id": url(`/blog/${slug}`),
     },
     author: {
-      "@type": "Organization",
-      name: business.legalName,
-      url: siteConfig.url,
+      "@type": "Person",
+      "@id": url("/about#founder"),
+      name: authorName,
+      jobTitle: authorRole,
+      url: url("/about"),
+      description: "Founder and route specialist at Manoj Tours and Travels with 12+ years of verified Bangalore cab logistics and South India highway experience.",
+      worksFor: {
+        "@type": "Organization",
+        "@id": url("/#organization"),
+        name: business.legalName,
+      },
     },
+    publisher: {
+      "@type": "Organization",
+      "@id": url("/#organization"),
+      name: business.legalName,
+      logo: {
+        "@type": "ImageObject",
+        url: url("/icon"),
+      },
+    },
+  };
+}
+
+/**
+ * Author / Founder Person Schema for E-E-A-T and Knowledge Graph
+ */
+export function authorPersonSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": url("/about#founder"),
+    name: "Manoj Kumar",
+    jobTitle: "Founder & Operations Head",
+    worksFor: { "@id": url("/#organization") },
+    url: url("/about"),
+    description: "Founder and route specialist at Manoj Tours and Travels with over 12 years of hands-on experience in Bangalore local cabs, airport transfers, and South India outstation highway travel.",
+    knowsAbout: [
+      "Bangalore Taxi Logistics",
+      "Kempegowda International Airport Transfers",
+      "Karnataka Outstation Corridors",
+      "Interstate Permits & FASTag Tolls",
+      "Fleet Safety and Regulatory Compliance",
+    ],
+  };
+}
+
+/**
+ * Legal / Policy WebPage Schema with Published & Modified Dates
+ */
+export function legalPageSchema({ title, description, path, datePublished, dateModified }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": url(`${path}#webpage`),
+    name: title,
+    description,
+    url: url(path),
+    datePublished: datePublished || "2024-01-01T00:00:00+05:30",
+    dateModified: dateModified || "2026-03-29T10:00:00+05:30",
+    inLanguage: "en-IN",
     publisher: { "@id": url("/#organization") },
   };
 }

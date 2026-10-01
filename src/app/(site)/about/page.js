@@ -11,6 +11,7 @@ import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { AboutKanyakumariImage } from "@/components/about/AboutKanyakumariImage";
 import { business } from "@/config/business.config";
 import { buildMetadata } from "@/lib/metadata";
+import { authorPersonSchema } from "@/lib/structured-data";
 
 const breadcrumbItems = [
   { label: "Home", href: "/" },
@@ -45,8 +46,14 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const personSchema = authorPersonSchema();
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       <PageHero
 
 
@@ -93,6 +100,47 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <AboutKanyakumariImage />
+        </div>
+      </Section>
+
+      <Section tone="paper" id="founder" className="scroll-mt-24 border-t border-[var(--color-line)]">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <div className="rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-sand)]/60 p-8 md:p-12">
+              <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-ink)] font-display text-2xl font-bold text-[var(--color-accent-soft)] shadow-md">
+                  MK
+                </div>
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-baseline gap-3">
+                    <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)] md:text-3xl">
+                      Manoj Kumar
+                    </h2>
+                    <span className="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent-strong,#b84000)]">
+                      Founder &amp; Operations Head
+                    </span>
+                  </div>
+                  <p className="mt-4 text-base leading-relaxed text-[var(--color-text-muted)]">
+                    With over 12 years of hands-on experience in commercial passenger transport across Karnataka and South India, Manoj founded Manoj Tours and Travels (Manoj Taxi Service) with a single commitment: reliable, punctual, and transparent cab travel without surprise charges.
+                  </p>
+                  <p className="mt-3 text-base leading-relaxed text-[var(--color-text-muted)]">
+                    Based out of Kaggalipura, Kanakapura Road, Manoj actively oversees 24×7 fleet operations, route planning for Western Ghats and interstate corridors, Kempegowda Airport dispatching, and driver road-safety training.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3 text-xs font-semibold text-[var(--color-ink)]">
+                    <span className="rounded-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-1.5 shadow-sm">
+                      ✓ 12+ Years Highway &amp; City Logistics
+                    </span>
+                    <span className="rounded-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-1.5 shadow-sm">
+                      ✓ Karnataka &amp; South India Route Specialist
+                    </span>
+                    <span className="rounded-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-1.5 shadow-sm">
+                      ✓ Commercial Safety &amp; FASTag Toll Compliance
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Section>
 

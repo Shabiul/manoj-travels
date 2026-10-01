@@ -33,6 +33,7 @@ export function CinematicSection() {
           <Video
             src="/videos/sections/kerala.mp4"
             poster="/images/kerala-poster.webp"
+            posterAlt="Scenic South India road trip and Kerala outstation tour with Manoj Tours and Travels"
             className={cn(kenBurnsEnabled && "kenburns")}
           />
         </div>
