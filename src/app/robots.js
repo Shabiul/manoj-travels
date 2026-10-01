@@ -23,10 +23,10 @@ export default function robots() {
         disallow: ["/api/", "/admin/"],
       },
       {
-        // Explicitly welcome AI and Answer Engine crawlers for GEO, AEO, and AIEO citation
         userAgent: [
           "GPTBot",
           "ChatGPT-User",
+          "OAI-SearchBot",
           "ClaudeBot",
           "Claude-Web",
           "PerplexityBot",
@@ -35,8 +35,9 @@ export default function robots() {
           "Amazonbot",
           "CCBot",
           "cohere-ai",
+          "Meta-ExternalAgent",
         ],
-        allow: "/",
+        allow: ["/", "/llms.txt", "/llms-full.txt", "/ads.txt"],
         disallow: ["/api/", "/admin/"],
       },
     ],

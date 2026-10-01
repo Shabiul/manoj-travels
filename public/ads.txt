@@ -1,2 +1,12 @@
-# Google Ads / Google AdSense Authorized Digital Sellers
+# ==============================================================================
+# Authorized Digital Sellers (ads.txt)
+# Specification: IAB Tech Lab Ads.txt v1.1
+# Canonical: https://www.manojtoursandtravels.in/ads.txt
+# Entity: Manoj Tours and Travels (Manoj Taxi Service)
+# ==============================================================================
+contact=mailto:manojtaxiservice29@gmail.com
+contact=https://www.manojtoursandtravels.in/contact
+subdomain=manojtoursandtravels.in
+
+# Google AdSense / Google Ads
 google.com, pub-10846077480, DIRECT, f08c47fec0942fa0
