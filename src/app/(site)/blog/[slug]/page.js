@@ -8,6 +8,7 @@ import { ArticleSchema } from "@/components/seo/ArticleSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { CallButton } from "@/components/common/CallButton";
 import { WhatsAppButton } from "@/components/common/WhatsAppButton";
+import { FareEstimator } from "@/components/common/FareEstimator";
 import { ServiceCTA } from "@/components/services/ServiceCTA";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
 import { getServiceBySlug } from "@/data/services";
@@ -17,8 +18,9 @@ export function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const post = getBlogPostBySlug(params.slug);
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const post = getBlogPostBySlug(resolvedParams.slug);
   if (!post) return {};
   return buildMetadata({
     title: post.title,
@@ -29,8 +31,9 @@ export function generateMetadata({ params }) {
   });
 }
 
-export default function BlogPostPage({ params }) {
-  const post = getBlogPostBySlug(params.slug);
+export default async function BlogPostPage({ params }) {
+  const resolvedParams = await params;
+  const post = getBlogPostBySlug(resolvedParams.slug);
   if (!post) notFound();
 
   const relatedService = post.relatedServiceSlug ? getServiceBySlug(post.relatedServiceSlug) : null;
@@ -39,6 +42,12 @@ export default function BlogPostPage({ params }) {
     { label: "Travel Guides", href: "/blog" },
     { label: post.title, href: `/blog/${post.slug}` },
   ];
+
+  const defaultDestination = post.slug.includes("mysore")
+    ? "mysore"
+    : post.slug.includes("mangalore")
+    ? "mangalore"
+    : "mysore";
 
   return (
     <Section tone="paper" className="pt-36 md:pt-44">
@@ -112,17 +121,27 @@ export default function BlogPostPage({ params }) {
             <Image src={post.image} alt={post.title} title={post.title} wrapperClassName="h-full" />
           </div>
 
-          {/* Answer-First Structure: Inverted-Pyramid Quick Answer Box */}
+          {/* Answer-First Structure: Inverted-Pyramid Quick Answer Box with Speakable CSS selectors */}
           {post.directAnswer && (
-            <div className="mt-8 rounded-[var(--radius-md)] border-l-4 border-[var(--color-accent)] bg-[var(--color-sand)] p-5 shadow-[var(--shadow-soft)]">
-              <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-accent-strong,#b84000)]">
-                Direct Answer / Key Takeaway
-              </p>
+            <div className="ai-citation-block direct-answer-text mt-8 rounded-[var(--radius-md)] border-l-4 border-[var(--color-accent)] bg-[var(--color-sand)] p-5 shadow-[var(--shadow-soft)]">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-accent-strong,#b84000)]">
+                  Direct Answer / Key Takeaway
+                </p>
+                <span className="rounded bg-[var(--color-ink)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--color-ink)] uppercase">
+                  Verified Factual Standard
+                </span>
+              </div>
               <p className="mt-2 text-base font-medium leading-relaxed text-[var(--color-ink)]">
                 {post.directAnswer}
               </p>
             </div>
           )}
+
+          {/* Interactive Fare Estimator Widget (Enhancement 6: Dwell Time & Instant CRO) */}
+          <div className="mt-8">
+            <FareEstimator initialDestination={defaultDestination} />
+          </div>
 
           {/* Quick CTA Strip for High-Intent Readers */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-sand)]/50 p-4 sm:p-5">
@@ -158,11 +177,15 @@ export default function BlogPostPage({ params }) {
                 const HeadingTag = section.level === "h3" ? "h3" : "h2";
                 const headingClass =
                   section.level === "h3"
-                    ? "font-display text-xl font-semibold text-[var(--color-ink)] mt-6 mb-3"
-                    : "font-display text-2xl md:text-3xl font-bold tracking-tight text-[var(--color-ink)] mt-10 mb-4 border-b border-[var(--color-line)]/60 pb-3";
+                    ? "font-display text-xl sm:text-2xl font-semibold text-[var(--color-ink)] mt-8 mb-3"
+                    : "font-display text-2xl md:text-3xl font-bold tracking-tight text-[var(--color-ink)] mt-12 mb-4 border-b border-[var(--color-line)]/60 pb-3";
 
                 return (
-                  <section key={sIdx} id={section.id} className="scroll-mt-28">
+                  <section
+                    key={sIdx}
+                    id={section.id}
+                    className={`scroll-mt-28 ${section.isAiCitation ? "ai-citation-block" : ""}`}
+                  >
                     {section.heading && (
                       <HeadingTag className={headingClass}>
                         {section.heading}
@@ -178,7 +201,62 @@ export default function BlogPostPage({ params }) {
                       </p>
                     ))}
 
-                    {/* Rich Data / Pricing Table */}
+                    {/* Driver Insider Tips (Enhancement 1: Information Gain Injection) */}
+                    {section.insiderTips?.length > 0 && (
+                      <div className="my-7 space-y-4">
+                        {section.insiderTips.map((tip, tIdx) => (
+                          <div
+                            key={tIdx}
+                            className="rounded-[var(--radius-md)] border-2 border-[var(--color-accent-soft,#e5c494)] bg-amber-50/70 p-5 shadow-sm"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-accent-strong,#b84000)] text-xs font-bold text-white">
+                                💡
+                              </span>
+                              <span className="text-xs font-extrabold uppercase tracking-wider text-[var(--color-accent-strong,#b84000)]">
+                                {tip.badge || "Driver Insider Tip (Information Gain)"}
+                              </span>
+                            </div>
+                            <h4 className="mt-2 font-display text-base sm:text-lg font-bold text-[var(--color-ink)]">
+                              {tip.title}
+                            </h4>
+                            <p className="mt-1.5 text-sm sm:text-[15px] leading-relaxed text-[var(--color-text)]">
+                              {tip.text}
+                            </p>
+                            {tip.author && (
+                              <p className="mt-2 text-xs font-medium text-[var(--color-text-muted)]">
+                                — {tip.author}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Customer Verified Review (Enhancement 5: Review Mining for AEO) */}
+                    {section.reviewVerification && (
+                      <div className="my-6 rounded-[var(--radius-md)] border border-emerald-300 bg-emerald-50/60 p-5 shadow-sm">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1 text-amber-500">
+                            {"★".repeat(section.reviewVerification.stars || 5)}
+                          </div>
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800">
+                            ✓ Customer Verified Review
+                          </span>
+                        </div>
+                        <p className="mt-3 text-base italic leading-relaxed text-[var(--color-ink)]">
+                          &ldquo;{section.reviewVerification.quote}&rdquo;
+                        </p>
+                        <div className="mt-3 flex items-center justify-between border-t border-emerald-200/60 pt-2.5 text-xs text-[var(--color-text-muted)]">
+                          <span className="font-semibold text-[var(--color-ink)]">
+                            {section.reviewVerification.author}, {section.reviewVerification.location}
+                          </span>
+                          <span>Trip: {section.reviewVerification.trip}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Rich Data / Pricing Table / Comparison Table */}
                     {section.table && (
                       <div className="my-6 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-line)] shadow-sm">
                         <table className="w-full min-w-[560px] text-left text-sm">

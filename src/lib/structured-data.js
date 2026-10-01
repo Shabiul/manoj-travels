@@ -446,6 +446,20 @@ export function articleSchema({
         url: url("/icon"),
       },
     },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".ai-citation-block", ".direct-answer-text"],
+      xpath: ["/html/head/title"],
+    },
+    spatialCoverage: {
+      "@type": "Place",
+      name: "Bangalore & South India Highway Corridors",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: business.geo.latitude,
+        longitude: business.geo.longitude,
+      },
+    },
   };
 }
 

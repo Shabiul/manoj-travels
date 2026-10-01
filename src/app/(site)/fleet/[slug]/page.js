@@ -11,8 +11,9 @@ export function generateStaticParams() {
   return fleet.map((v) => ({ slug: v.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const vehicle = getFleetBySlug(params.slug);
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const vehicle = getFleetBySlug(resolvedParams.slug);
   if (!vehicle) return {};
   return buildMetadata({
     title: `${vehicle.name} — ${vehicle.category} Cab Hire in Bangalore`,
@@ -22,8 +23,9 @@ export function generateMetadata({ params }) {
   });
 }
 
-export default function FleetVehiclePage({ params }) {
-  const vehicle = getFleetBySlug(params.slug);
+export default async function FleetVehiclePage({ params }) {
+  const resolvedParams = await params;
+  const vehicle = getFleetBySlug(resolvedParams.slug);
   if (!vehicle) notFound();
 
   const breadcrumbItems = [

@@ -17,8 +17,9 @@ export function generateStaticParams() {
   return destinations.map((d) => ({ slug: d.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const destination = getDestinationBySlug(params.slug);
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const destination = getDestinationBySlug(resolvedParams.slug);
   if (!destination) return {};
   return buildMetadata({
     title: `Bangalore to ${destination.name} Taxi & Cab Service`,
@@ -29,8 +30,9 @@ export function generateMetadata({ params }) {
   });
 }
 
-export default function DestinationPage({ params }) {
-  const destination = getDestinationBySlug(params.slug);
+export default async function DestinationPage({ params }) {
+  const resolvedParams = await params;
+  const destination = getDestinationBySlug(resolvedParams.slug);
   if (!destination) notFound();
 
   const related = destinations.filter((d) => d.slug !== destination.slug).slice(0, 3);
