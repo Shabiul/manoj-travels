@@ -29,6 +29,10 @@ const nextConfig = {
         source: "/:path*",
         headers: [
           {
+            key: "X-Robots-Tag",
+            value: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          },
+          {
             key: "X-Content-Type-Options",
             value: "nosniff",
           },
@@ -43,8 +47,30 @@ const nextConfig = {
         ],
       },
       {
+        source: "/admin/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow, noarchive",
+          },
+        ],
+      },
+      {
+        source: "/api/admin/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow, noarchive",
+          },
+        ],
+      },
+      {
         source: "/images/:path*",
         headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "all, max-image-preview:large",
+          },
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
@@ -54,6 +80,10 @@ const nextConfig = {
       {
         source: "/videos/:path*",
         headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "all, max-video-preview:-1",
+          },
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
