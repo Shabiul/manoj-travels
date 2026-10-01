@@ -1,7 +1,12 @@
 // Practical, factual travel guides with Answer-First structure,
 // named authority citations, outbound links, and verified author signals.
 
+import { bangaloreToMysoreGuide } from "./blogPosts/bangaloreToMysoreGuide";
+import { gandhiJayantiGuide } from "./blogPosts/gandhiJayantiGuide";
+
 export const blogPosts = [
+  bangaloreToMysoreGuide,
+  gandhiJayantiGuide,
   {
     slug: "one-way-vs-round-trip-cab-bangalore",
     title: "One Way vs Round Trip Cabs: Which Should You Book?",

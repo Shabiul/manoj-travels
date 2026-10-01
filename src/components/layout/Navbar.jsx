@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { callLink } from "@/config/business.config";
 import { useBusinessInfo } from "@/components/common/SiteDataProvider";
 import { useScroll } from "@/hooks/useScroll";
+import { HolidayBanner } from "@/components/common/HolidayBanner";
 import { trackPhoneConversion, trackWhatsAppConversion } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
@@ -37,6 +38,7 @@ export function Navbar() {
           : "border-transparent bg-gradient-to-b from-[var(--color-ink)]/45 via-[var(--color-ink)]/12 to-transparent backdrop-blur-[2px]"
       )}
     >
+      <HolidayBanner />
       <Container
         className={cn(
           "flex items-center justify-between gap-2 transition-[padding] duration-500 ease-out min-[1440px]:gap-3",

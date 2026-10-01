@@ -5,6 +5,9 @@ import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Image } from "@/components/ui/Image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArticleSchema } from "@/components/seo/ArticleSchema";
+import { FAQSchema } from "@/components/seo/FAQSchema";
+import { CallButton } from "@/components/common/CallButton";
+import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { ServiceCTA } from "@/components/services/ServiceCTA";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
 import { getServiceBySlug } from "@/data/services";
@@ -49,6 +52,7 @@ export default function BlogPostPage({ params }) {
         authorName={post.author}
         authorRole={post.authorRole}
       />
+      {post.faqs?.length > 0 && <FAQSchema faqs={post.faqs} />}
       <Breadcrumbs items={breadcrumbItems} />
 
       <article className="mx-auto mt-8 max-w-3xl">
@@ -120,14 +124,197 @@ export default function BlogPostPage({ params }) {
             </div>
           )}
 
-          {/* Core Body Content */}
-          <div className="prose-content mt-8 space-y-5">
-            {post.content.map((paragraph, i) => (
-              <p key={i} className="text-base leading-relaxed text-[var(--color-text-muted)]">
-                {paragraph}
+          {/* Quick CTA Strip for High-Intent Readers */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-sand)]/50 p-4 sm:p-5">
+            <div>
+              <p className="text-sm font-bold text-[var(--color-ink)]">
+                Need an immediate outstation cab or enquiry?
               </p>
-            ))}
+              <p className="text-xs text-[var(--color-text-muted)]">
+                24×7 dispatch across all Bangalore localities &amp; Airport.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <CallButton label="Call Driver Dispatch" />
+              <WhatsAppButton label="WhatsApp Fares" />
+            </div>
           </div>
+
+          {/* Core Body Content — Simple Paragraphs Fallback */}
+          {post.content?.length > 0 && (
+            <div className="prose-content mt-8 space-y-5">
+              {post.content.map((paragraph, i) => (
+                <p key={i} className="text-base leading-relaxed text-[var(--color-text-muted)]">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {/* Structured Rich Sections (H2, H3, Tables, Lists, Callouts, Images) */}
+          {post.sections?.length > 0 && (
+            <div className="mt-10 space-y-12">
+              {post.sections.map((section, sIdx) => {
+                const HeadingTag = section.level === "h3" ? "h3" : "h2";
+                const headingClass =
+                  section.level === "h3"
+                    ? "font-display text-xl font-semibold text-[var(--color-ink)] mt-6 mb-3"
+                    : "font-display text-2xl md:text-3xl font-bold tracking-tight text-[var(--color-ink)] mt-10 mb-4 border-b border-[var(--color-line)]/60 pb-3";
+
+                return (
+                  <section key={sIdx} id={section.id} className="scroll-mt-28">
+                    {section.heading && (
+                      <HeadingTag className={headingClass}>
+                        {section.heading}
+                      </HeadingTag>
+                    )}
+
+                    {section.paragraphs?.map((p, pIdx) => (
+                      <p
+                        key={pIdx}
+                        className="mt-4 text-[16.5px] leading-relaxed text-[var(--color-text-muted)]"
+                      >
+                        {p}
+                      </p>
+                    ))}
+
+                    {/* Rich Data / Pricing Table */}
+                    {section.table && (
+                      <div className="my-6 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-line)] shadow-sm">
+                        <table className="w-full min-w-[560px] text-left text-sm">
+                          {section.table.caption && (
+                            <caption className="bg-[var(--color-sand)] p-3 text-xs font-semibold text-[var(--color-text-muted)] text-left border-b border-[var(--color-line)]">
+                              {section.table.caption}
+                            </caption>
+                          )}
+                          <thead className="bg-[var(--color-ink)] text-[var(--color-text-on-dark)]">
+                            <tr>
+                              {section.table.headers.map((th, hIdx) => (
+                                <th
+                                  key={hIdx}
+                                  className="px-4 py-3.5 font-semibold tracking-wide text-xs uppercase"
+                                >
+                                  {th}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[var(--color-line)] bg-white/70">
+                            {section.table.rows.map((row, rIdx) => (
+                              <tr
+                                key={rIdx}
+                                className={rIdx % 2 === 0 ? "bg-transparent" : "bg-[var(--color-sand)]/30"}
+                              >
+                                {row.map((cell, cIdx) => (
+                                  <td
+                                    key={cIdx}
+                                    className={`px-4 py-3.5 text-sm ${
+                                      cIdx === 0
+                                        ? "font-semibold text-[var(--color-ink)]"
+                                        : "text-[var(--color-text)]"
+                                    }`}
+                                  >
+                                    {cell}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+
+                    {/* Highlight Callout Box */}
+                    {section.callout && (
+                      <div className="my-6 rounded-[var(--radius-md)] border-l-4 border-[var(--color-accent-2)] bg-[var(--color-sand)] p-4 sm:p-5">
+                        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-accent-2)]">
+                          {section.callout.title || "Highway Travel Tip"}
+                        </p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-ink)]">
+                          {section.callout.text}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Bullet List */}
+                    {section.list?.length > 0 && (
+                      <ul className="my-5 space-y-2.5 pl-2">
+                        {section.list.map((item, lIdx) => (
+                          <li
+                            key={lIdx}
+                            className="flex items-start gap-2.5 text-[15.5px] leading-relaxed text-[var(--color-text-muted)]"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]" />
+                            <span>
+                              {typeof item === "string" ? (
+                                item
+                              ) : (
+                                <>
+                                  <strong className="text-[var(--color-ink)]">
+                                    {item.label}:{" "}
+                                  </strong>
+                                  {item.description}
+                                </>
+                              )}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {/* Sub-Images (e.g. vehicle fleet or attraction) */}
+                    {section.image && (
+                      <figure className="my-6 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-line)] bg-white">
+                        <div className="relative h-56 sm:h-72 w-full">
+                          <Image
+                            src={section.image.src}
+                            alt={section.image.alt}
+                            title={section.image.title || section.image.alt}
+                            wrapperClassName="h-full"
+                          />
+                        </div>
+                        {section.image.caption && (
+                          <figcaption className="bg-[var(--color-sand)]/70 px-4 py-2.5 text-center text-xs text-[var(--color-text-muted)]">
+                            {section.image.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    )}
+                  </section>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Interactive FAQs Accordion */}
+          {post.faqs?.length > 0 && (
+            <section className="mt-14 border-t border-[var(--color-line)] pt-10">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-[var(--color-ink)]">
+                Frequently Asked Questions
+              </h2>
+              <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+                Everything you need to know about fares, tolls, bookings, and route logistics:
+              </p>
+              <div className="mt-6 space-y-4">
+                {post.faqs.map((faq, fIdx) => (
+                  <details
+                    key={fIdx}
+                    className="group rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-sand)]/40 p-4 open:bg-white transition-colors"
+                  >
+                    <summary className="cursor-pointer list-none font-display font-semibold text-[var(--color-ink)] flex items-center justify-between gap-3">
+                      <span>{faq.question}</span>
+                      <span className="shrink-0 text-[var(--color-accent)] transition-transform group-open:rotate-180">
+                        ▾
+                      </span>
+                    </summary>
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)] border-t border-[var(--color-line)]/50 pt-3">
+                      {faq.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Authority Quotation with Verified Attribution */}
           {post.quote && (
